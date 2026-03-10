@@ -16,19 +16,40 @@ import ThemeSwitcher from "@/components/ThemeSwitcher";
 
 const Home = () => {
   return (
-    <main className="relative bg-black-100 flex justify-center items-center flex-col overflow-hidden mx-auto sm:px-10 px-5">
+    <main className="relative bg-black-100 flex justify-center items-center flex-col overflow-hidden mx-auto sm:px-10 px-5 min-h-screen">
       <Particles />
       <div className="max-w-7xl w-full">
         <FloatingNav navItems={navItems} />
         <CustomCursor />
         <ThemeSwitcher />
-        <Hero />
-        <Grid />
-        <CodeSnippet />
-        <RecentProjects />
-        <Experience />
-        <Approach />
-        <Footer />
+
+        <section id="hero" className="relative z-10">
+          <Hero />
+        </section>
+
+        <section id="about" className="relative z-10">
+          <Grid />
+        </section>
+
+        <section id="skills" className="relative z-10 py-20">
+          <CodeSnippet />
+        </section>
+
+        <section id="projects" className="relative z-10">
+          <RecentProjects />
+        </section>
+
+        <section id="experience" className="relative z-10">
+          <Experience />
+        </section>
+
+        <section id="approach" className="relative z-10">
+          <Approach />
+        </section>
+
+        <section id="contact" className="relative z-10">
+          <Footer />
+        </section>
       </div>
     </main>
   );
