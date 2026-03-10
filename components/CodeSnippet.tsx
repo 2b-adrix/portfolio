@@ -100,33 +100,55 @@ const CodeSnippet: React.FC = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="bg-gray-900 rounded-lg p-6 max-w-2xl mx-auto"
+      className="max-w-4xl mx-auto"
     >
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-xl font-bold text-purple-400">
-          {codeSnippets[currentSnippet].title}
-        </h3>
-        <div className="flex space-x-2">
-          <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-          <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-        </div>
+      <div className="text-center mb-12">
+        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          Live Code <span className="text-purple-400">Showcase</span>
+        </h2>
+        <p className="text-gray-400 text-lg">
+          Watch my code come to life with real-time typing animation
+        </p>
       </div>
-      <pre className="text-green-400 font-mono text-sm overflow-x-auto">
-        <code>{displayedCode}</code>
-        {isTyping && <span className="animate-pulse">|</span>}
-      </pre>
-      <div className="flex justify-center mt-4 space-x-2">
-        {codeSnippets.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentSnippet(index)}
-            className={`w-2 h-2 rounded-full transition-colors ${
-              index === currentSnippet ? 'bg-purple-500' : 'bg-gray-600'
-            }`}
-            title={`Switch to ${codeSnippets[index].title}`}
-          />
-        ))}
+
+      <div className="bg-gray-900/50 backdrop-blur-lg rounded-2xl p-6 border border-gray-700/50 shadow-2xl">
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center space-x-3">
+            <div className="flex space-x-2">
+              <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+              <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+            </div>
+            <span className="text-gray-400 text-sm font-medium">
+              {codeSnippets[currentSnippet].language.toUpperCase()}
+            </span>
+          </div>
+          <h3 className="text-xl font-bold text-purple-400">
+            {codeSnippets[currentSnippet].title}
+          </h3>
+        </div>
+
+        <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-600/30">
+          <pre className="text-green-400 font-mono text-sm overflow-x-auto leading-relaxed">
+            <code>{displayedCode}</code>
+            {isTyping && <span className="animate-pulse text-purple-400">|</span>}
+          </pre>
+        </div>
+
+        <div className="flex justify-center mt-6 space-x-3">
+          {codeSnippets.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSnippet(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                index === currentSnippet
+                  ? 'bg-purple-500 scale-125 shadow-lg shadow-purple-500/50'
+                  : 'bg-gray-600 hover:bg-gray-500'
+              }`}
+              title={`Switch to ${codeSnippets[index].title}`}
+            />
+          ))}
+        </div>
       </div>
     </motion.div>
   );

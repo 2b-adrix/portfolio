@@ -70,25 +70,45 @@ const GitHubStats: React.FC = () => {
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-8">
-      <div className="text-center">
-        <h3 className="text-2xl font-bold text-purple">{stats.followers}</h3>
-        <p className="text-sm text-gray-400">Followers</p>
+      <div className="text-center group">
+        <div className="bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-lg p-4 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 hover:scale-105">
+          <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400 mb-1">
+            {stats.followers.toLocaleString()}
+          </h3>
+          <p className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors">Followers</p>
+        </div>
       </div>
-      <div className="text-center">
-        <h3 className="text-2xl font-bold text-purple">{stats.following}</h3>
-        <p className="text-sm text-gray-400">Following</p>
+      <div className="text-center group">
+        <div className="bg-gradient-to-br from-green-500/20 to-teal-500/20 rounded-lg p-4 border border-green-500/20 hover:border-green-500/40 transition-all duration-300 hover:scale-105">
+          <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-teal-400 mb-1">
+            {stats.following.toLocaleString()}
+          </h3>
+          <p className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors">Following</p>
+        </div>
       </div>
-      <div className="text-center">
-        <h3 className="text-2xl font-bold text-purple">{stats.public_repos}</h3>
-        <p className="text-sm text-gray-400">Repositories</p>
+      <div className="text-center group">
+        <div className="bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-lg p-4 border border-orange-500/20 hover:border-orange-500/40 transition-all duration-300 hover:scale-105">
+          <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400 mb-1">
+            {stats.public_repos.toLocaleString()}
+          </h3>
+          <p className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors">Repositories</p>
+        </div>
       </div>
-      <div className="text-center">
-        <h3 className="text-2xl font-bold text-purple">{stats.total_stars}</h3>
-        <p className="text-sm text-gray-400">Stars</p>
+      <div className="text-center group">
+        <div className="bg-gradient-to-br from-yellow-500/20 to-orange-500/20 rounded-lg p-4 border border-yellow-500/20 hover:border-yellow-500/40 transition-all duration-300 hover:scale-105">
+          <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-400 mb-1">
+            {stats.total_stars.toLocaleString()}
+          </h3>
+          <p className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors">Stars</p>
+        </div>
       </div>
-      <div className="text-center">
-        <h3 className="text-2xl font-bold text-purple">{stats.contributions}</h3>
-        <p className="text-sm text-gray-400">Contributions</p>
+      <div className="text-center group md:col-span-1 col-span-2">
+        <div className="bg-gradient-to-br from-pink-500/20 to-purple-500/20 rounded-lg p-4 border border-pink-500/20 hover:border-pink-500/40 transition-all duration-300 hover:scale-105">
+          <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400 mb-1">
+            {stats.contributions.toLocaleString()}
+          </h3>
+          <p className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors">Contributions</p>
+        </div>
       </div>
     </div>
   );

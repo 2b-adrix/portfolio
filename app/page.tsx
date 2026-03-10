@@ -13,15 +13,21 @@ import CustomCursor from "@/components/CustomCursor";
 import Particles from "@/components/Particles";
 import CodeSnippet from "@/components/CodeSnippet";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
+import ScrollProgress from "@/components/ScrollProgress";
+import Preloader from "@/components/Preloader";
+import FloatingActionButton from "@/components/FloatingActionButton";
 
 const Home = () => {
   return (
     <main className="relative bg-black-100 flex justify-center items-center flex-col overflow-hidden mx-auto sm:px-10 px-5 min-h-screen">
+      <Preloader />
+      <ScrollProgress />
       <Particles />
       <div className="max-w-7xl w-full">
         <FloatingNav navItems={navItems} />
         <CustomCursor />
         <ThemeSwitcher />
+        <FloatingActionButton />
 
         <section id="hero" className="relative z-10">
           <Hero />
