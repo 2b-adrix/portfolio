@@ -88,7 +88,13 @@ const FloatingActionButton: React.FC = () => {
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            onClick={() => setIsExpanded(!isExpanded)}
+            onClick={() => {
+              if (isExpanded) {
+                setIsExpanded(false);
+              } else {
+                scrollToTop();
+              }
+            }}
             className="w-14 h-14 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center text-white text-xl relative overflow-hidden group"
           >
             <motion.div
