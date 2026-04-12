@@ -304,10 +304,5 @@ interface ShaderProps {
       type: string;
     };
   };
-  navItems: {
-    name: string;
-    link: string;
-    icon?: React.ReactNode;
-  }[];
   maxFps?: number;
 }
