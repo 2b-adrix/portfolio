@@ -22,15 +22,17 @@ export function Button({
 }: {
   borderRadius?: string;
   children: React.ReactNode;
-  as?: any;
+  as?: React.ElementType;
   containerClassName?: string;
   borderClassName?: string;
   duration?: number;
   className?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }) {
+  const Tag = Component as any;
+
   return (
-    <Component
+    <Tag
       suppressHydrationWarning
       className={cn(
         // remove h-16 w-40, add  md:col-span-2
@@ -67,7 +69,7 @@ export function Button({
       >
         {children}
       </div>
-    </Component>
+    </Tag>
   );
 }
 
@@ -82,7 +84,8 @@ export const MovingBorder = ({
   duration?: number;
   rx?: string;
   ry?: string;
-  [key: string]: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any; // Keep any for SVG props compatibility
 }) => {
   const pathRef = useRef<SVGRectElement>(null);
   const progress = useMotionValue<number>(0);
