@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { IoCopyOutline, IoCheckmarkOutline } from "react-icons/io5";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform, MotionValue } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { BackgroundGradientAnimation } from "./GradientBg";
 import GridGlobe from "./GridGlobe";
@@ -24,7 +24,7 @@ const rightStack = [
 ];
 
 // ─── Spotlight Component ──────────────────────────────────────────────────────
-const SpotlightOverlay = ({ mouseX, mouseY }: { mouseX: any; mouseY: any }) => (
+const SpotlightOverlay = ({ mouseX, mouseY }: { mouseX: MotionValue<number>; mouseY: MotionValue<number> }) => (
   <motion.div
     className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 group-hover/bento:opacity-100 transition duration-300"
     style={{

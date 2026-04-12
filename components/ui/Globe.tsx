@@ -156,38 +156,38 @@ export function Globe({ globeConfig, data }: WorldProps) {
 
     globeRef.current
       .arcsData(data)
-      .arcStartLat((d: any) => (d as { startLat: number }).startLat * 1)
-      .arcStartLng((d: any) => (d as { startLng: number }).startLng * 1)
-      .arcEndLat((d: any) => (d as { endLat: number }).endLat * 1)
-      .arcEndLng((d: any) => (d as { endLng: number }).endLng * 1)
-      .arcColor((e: any) => (e as { color: string }).color)
-      .arcAltitude((e: any) => {
+      .arcStartLat((d: unknown) => (d as { startLat: number }).startLat * 1)
+      .arcStartLng((d: unknown) => (d as { startLng: number }).startLng * 1)
+      .arcEndLat((d: unknown) => (d as { endLat: number }).endLat * 1)
+      .arcEndLng((d: unknown) => (d as { endLng: number }).endLng * 1)
+      .arcColor((e: unknown) => (e as { color: string }).color)
+      .arcAltitude((e: unknown) => {
         return (e as { arcAlt: number }).arcAlt * 1;
       })
       .arcStroke(() => {
         return [0.32, 0.28, 0.3][Math.round(Math.random() * 2)];
       })
       .arcDashLength(defaultProps.arcLength)
-      .arcDashInitialGap((e: any) => (e as { order: number }).order * 1)
+      .arcDashInitialGap((e: unknown) => (e as { order: number }).order * 1)
       .arcDashGap(15)
       .arcDashAnimateTime(() => defaultProps.arcTime);
 
     globeRef.current
       .pointsData(globeData)
-      .pointColor((e: any) => e.color(0))
+      .pointColor((e: unknown) => (e as { color: (t: number) => string }).color(0))
       .pointsMerge(true)
       .pointAltitude(0.0)
       .pointRadius(2);
 
     globeRef.current
       .ringsData([])
-      .ringColor((e: any) => (t: any) => e.color(t))
+      .ringColor((e: unknown) => (t: unknown) => (e as { color: (t: unknown) => string }).color(t))
       .ringMaxRadius(defaultProps.maxRings)
       .ringPropagationSpeed(RING_PROPAGATION_SPEED)
       .ringRepeatPeriod(
         (defaultProps.arcTime * defaultProps.arcLength) / defaultProps.rings
       );
-  }, [data, globeData, defaultProps]);
+  }, [data, globeData, defaultProps.arcLength, defaultProps.arcTime, defaultProps.maxRings, defaultProps.rings]);
 
   useEffect(() => {
     if (globeRef.current) {
@@ -224,14 +224,14 @@ export function Globe({ globeConfig, data }: WorldProps) {
       );
 
       globeRef.current.ringsData(
-        globeData.filter((d, i) => numbersOfRings.includes(i))
+        globeData.filter((_, i) => numbersOfRings.includes(i))
       );
     }, 2000);
 
     return () => {
       clearInterval(interval);
     };
-  }, [globeRef.current, globeData]);
+  }, [globeRef.current, globeData, data.length]);
 
   return (
     <>

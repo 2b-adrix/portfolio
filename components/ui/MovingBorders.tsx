@@ -27,7 +27,7 @@ export function Button({
   borderClassName?: string;
   duration?: number;
   className?: string;
-  [key: string]: unknown;
+  [key: string]: any; // Use any for widespread SVG/HTML prop compatibility
 }) {
   const Tag = Component as any;
 
