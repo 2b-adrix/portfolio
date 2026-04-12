@@ -1,99 +1,78 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useState } from "react";
+import { motion } from "framer-motion";
 
-const codeSnippets = [
+const snippets = [
   {
-    title: "Kotlin Android App",
-    code: `class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        
-        val button = findViewById<Button>(R.id.myButton)
-        button.setOnClickListener {
-            Toast.makeText(this, "Hello from Kotlin!", Toast.LENGTH_SHORT).show()
+    title: "ViewModel + Coroutines",
+    lang: "Kotlin",
+    langColor: "#7F52FF",
+    code: `@HiltViewModel
+class ChatViewModel @Inject constructor(
+    private val repo: ChatRepository
+) : ViewModel() {
+
+    private val _messages = MutableStateFlow<List<Message>>(emptyList())
+    val messages: StateFlow<List<Message>> = _messages
+
+    fun loadMessages(roomId: String) {
+        viewModelScope.launch {
+            repo.getMessages(roomId)
+                .catch { e -> handleError(e) }
+                .collect { _messages.value = it }
         }
     }
 }`,
-    language: "kotlin"
   },
   {
-    title: "Python Cybersecurity Script",
-    code: `import socket
-import threading
+    title: "Jetpack Compose UI",
+    lang: "Kotlin / Compose",
+    langColor: "#00BCD4",
+    code: `@Composable
+fun ChatScreen(viewModel: ChatViewModel = hiltViewModel()) {
+    val messages by viewModel.messages.collectAsState()
 
-def port_scanner(host, port):
-    try:
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(1)
-        result = sock.connect_ex((host, port))
-        if result == 0:
-            print(f"Port {port} is open")
-        sock.close()
-    except:
-        pass
-
-# Scan common ports
-host = "127.0.0.1"
-for port in [21, 22, 80, 443, 3389]:
-    threading.Thread(target=port_scanner, args=(host, port)).start()`,
-    language: "python"
-  },
-  {
-    title: "Next.js Component",
-    code: `"use client";
-
-import { useState } from 'react';
-
-export default function Counter() {
-  const [count, setCount] = useState(0);
-  
-  return (
-    <div className="text-center">
-      <p className="text-2xl mb-4">Count: {count}</p>
-      <button 
-        onClick={() => setCount(count + 1)}
-        className="px-4 py-2 bg-purple-600 text-white rounded"
-      >
-        Increment
-      </button>
-    </div>
-  );
+    Scaffold(
+        topBar = { ChatTopBar() },
+        bottomBar = { MessageInput(onSend = viewModel::sendMessage) }
+    ) { padding ->
+        LazyColumn(modifier = Modifier.padding(padding)) {
+            items(messages) { msg ->
+                MessageBubble(message = msg)
+            }
+        }
+    }
 }`,
-    language: "typescript"
-  }
+  },
+  {
+    title: "Room Entity + DAO",
+    lang: "Kotlin / Room",
+    langColor: "#FF6F00",
+    code: `@Entity(tableName = "messages")
+data class MessageEntity(
+    @PrimaryKey val id: String,
+    val roomId: String,
+    val content: String,
+    val timestamp: Long,
+    val isSent: Boolean
+)
+
+@Dao
+interface MessageDao {
+    @Query("SELECT * FROM messages WHERE roomId = :id ORDER BY timestamp")
+    fun getMessages(id: String): Flow<List<MessageEntity>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(msg: MessageEntity)
+}`,
+  },
 ];
 
 const CodeSnippet: React.FC = () => {
-  const [currentSnippet, setCurrentSnippet] = useState(0);
-  const [displayedCode, setDisplayedCode] = useState('');
-  const [isTyping, setIsTyping] = useState(true);
+  const [current, setCurrent] = useState(0);
 
-  useEffect(() => {
-    const code = codeSnippets[currentSnippet].code;
-    let index = 0;
-    setDisplayedCode('');
-    setIsTyping(true);
-
-    const typeInterval = setInterval(() => {
-      if (index < code.length) {
-        setDisplayedCode(prev => prev + code[index]);
-        index++;
-      } else {
-        setIsTyping(false);
-        clearInterval(typeInterval);
-        
-        // Switch to next snippet after a delay
-        setTimeout(() => {
-          setCurrentSnippet(prev => (prev + 1) % codeSnippets.length);
-        }, 3000);
-      }
-    }, 50);
-
-    return () => clearInterval(typeInterval);
-  }, [currentSnippet]);
+  const s = snippets[current];
 
   return (
     <motion.div
@@ -102,53 +81,84 @@ const CodeSnippet: React.FC = () => {
       transition={{ duration: 0.5 }}
       className="max-w-4xl mx-auto"
     >
-      <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-          Live Code <span className="text-purple-400">Showcase</span>
+      {/* Header */}
+      <div className="text-center mb-10">
+        <h2 className="text-3xl md:text-4xl font-black text-white mb-3">
+          Real{" "}
+          <span className="text-gradient-violet">Android Code</span>{" "}
+          I Write
         </h2>
-        <p className="text-gray-400 text-lg">
-          Watch my code come to life with real-time typing animation
+        <p className="text-[#9999BB]">
+          Production-ready patterns — Coroutines, Compose, Room, Hilt DI
         </p>
       </div>
 
-      <div className="bg-gray-900/50 backdrop-blur-lg rounded-2xl p-6 border border-gray-700/50 shadow-2xl">
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center space-x-3">
-            <div className="flex space-x-2">
-              <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-              <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+      {/* Tab selector */}
+      <div className="flex gap-2 mb-4 flex-wrap">
+        {snippets.map((s, i) => (
+          <button
+            suppressHydrationWarning
+            key={i}
+            onClick={() => setCurrent(i)}
+            className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 border ${
+              i === current
+                ? "border-[#7F52FF] bg-[#7F52FF]/15 text-[#a78bfa]"
+                : "border-white/10 text-[#9999BB] hover:border-white/20"
+            }`}
+          >
+            {s.title}
+          </button>
+        ))}
+      </div>
+
+      {/* Code window */}
+      <motion.div
+        key={current}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="code-block overflow-hidden"
+      >
+        {/* Title bar */}
+        <div className="flex items-center justify-between px-4 py-3 border-b border-white/5">
+          <div className="flex items-center gap-3">
+            <div className="flex gap-1.5">
+              <div className="w-3 h-3 rounded-full bg-red-500/70" />
+              <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
+              <div className="w-3 h-3 rounded-full bg-[#00DE8A]/70" />
             </div>
-            <span className="text-gray-400 text-sm font-medium">
-              {codeSnippets[currentSnippet].language.toUpperCase()}
-            </span>
+            <span className="text-[#9999BB] text-xs mono">{s.title.toLowerCase().replace(/ /g, "_")}.kt</span>
           </div>
-          <h3 className="text-xl font-bold text-purple-400">
-            {codeSnippets[currentSnippet].title}
-          </h3>
+          <span
+            className="chip text-[10px] py-0.5"
+            style={{
+              background: s.langColor + "15",
+              borderColor: s.langColor + "30",
+              color: s.langColor,
+            }}
+          >
+            {s.lang}
+          </span>
         </div>
 
-        <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-600/30">
-          <pre className="text-green-400 font-mono text-sm overflow-x-auto leading-relaxed">
-            <code>{displayedCode}</code>
-            {isTyping && <span className="animate-pulse text-purple-400">|</span>}
-          </pre>
+        {/* Code body */}
+        <div className="p-5 overflow-x-auto">
+          <pre className="mono text-sm leading-relaxed text-[#C9D1D9] whitespace-pre">{s.code}</pre>
         </div>
+      </motion.div>
 
-        <div className="flex justify-center mt-6 space-x-3">
-          {codeSnippets.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSnippet(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === currentSnippet
-                  ? 'bg-purple-500 scale-125 shadow-lg shadow-purple-500/50'
-                  : 'bg-gray-600 hover:bg-gray-500'
-              }`}
-              title={`Switch to ${codeSnippets[index].title}`}
-            />
-          ))}
-        </div>
+      {/* Dot nav */}
+      <div className="flex justify-center gap-2 mt-6">
+        {snippets.map((_, i) => (
+          <button
+            suppressHydrationWarning
+            key={i}
+            onClick={() => setCurrent(i)}
+            className={`h-1.5 rounded-full transition-all duration-300 ${
+              i === current ? "w-8 bg-[#7F52FF]" : "w-1.5 bg-white/20"
+            }`}
+          />
+        ))}
       </div>
     </motion.div>
   );

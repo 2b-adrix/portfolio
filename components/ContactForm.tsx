@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { MdSend, MdCheckCircle, MdErrorOutline } from "react-icons/md";
+import { cn } from "@/lib/utils";
 
 interface FormData {
   name: string;
@@ -10,78 +12,56 @@ interface FormData {
 }
 
 const ContactForm: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
-    message: '',
-  });
+  const [formData, setFormData] = useState<FormData>({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState<Partial<FormData>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const validateForm = (): boolean => {
-    const newErrors: Partial<FormData> = {};
-
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
-    }
-
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email is invalid';
-    }
-
-    if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+  const validate = (): boolean => {
+    const e: Partial<FormData> = {};
+    if (!formData.name.trim()) e.name = "Full name required";
+    if (!formData.email.trim()) e.email = "Email address required";
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) e.email = "Invalid email format";
+    if (!formData.message.trim()) e.message = "Message cannot be empty";
+    setErrors(e);
+    return Object.keys(e).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validateForm()) return;
-
+    if (!validate()) return;
     setIsSubmitting(true);
-
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
-
+    // Simulate high-fidelity network request
+    await new Promise((r) => setTimeout(r, 2200));
     setIsSubmitting(false);
     setSubmitted(true);
-    setFormData({ name: '', email: '', message: '' });
+    setFormData({ name: "", email: "", message: "" });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-    // Clear error when user starts typing
+    setFormData((p) => ({ ...p, [e.target.name]: e.target.value }));
     if (errors[e.target.name as keyof FormData]) {
-      setErrors(prev => ({
-        ...prev,
-        [e.target.name]: undefined,
-      }));
+      setErrors((p) => ({ ...p, [e.target.name]: undefined }));
     }
   };
 
   if (submitted) {
     return (
       <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="text-center py-8"
+        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        className="flex flex-col items-center text-center p-8 gap-4"
       >
-        <h3 className="text-2xl font-bold text-green-400 mb-4">Thank you!</h3>
-        <p className="text-gray-300">Your message has been sent successfully. I&apos;ll get back to you soon.</p>
+        <div className="w-20 h-20 rounded-full bg-[#00DE8A]/10 border border-[#00DE8A]/30 flex items-center justify-center mb-2">
+            <MdCheckCircle className="text-[#00DE8A] text-5xl animate-bounce" />
+        </div>
+        <h3 className="text-3xl font-black text-white leading-tight">Transmission <br /><span className="text-gradient-green">Successful</span></h3>
+        <p className="text-[#9999BB] text-sm max-w-[280px]">Your message has been received. I normally respond within a single business day.</p>
         <button
           onClick={() => setSubmitted(false)}
-          className="mt-4 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+          className="mt-4 px-8 py-3 rounded-2xl glass-2 border-white/10 text-white font-bold text-sm hover:border-[#00DE8A]/50 transition-all material-bounce"
         >
-          Send Another Message
+          Send New Node
         </button>
       </motion.div>
     );
@@ -89,76 +69,92 @@ const ContactForm: React.FC = () => {
 
   return (
     <motion.form
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
       onSubmit={handleSubmit}
-      className="space-y-6 max-w-md mx-auto"
+      className="space-y-6"
     >
-      <div>
-        <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-          Name
-        </label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          className={`w-full px-4 py-3 bg-gray-800 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors ${
-            errors.name ? 'border-red-500' : 'border-gray-600'
-          }`}
-          placeholder="Your name"
-        />
-        {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Name Input */}
+        <div className="space-y-2">
+          <label className="text-[10px] font-black uppercase tracking-[0.3em] text-[#9999BB] ml-2">App User / Name</label>
+          <div className="relative">
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Aditya Kumar"
+              className={cn(
+                "w-full px-6 py-4 rounded-2xl glass-2 border-white/5 text-white font-medium placeholder:text-white/10 focus:outline-none focus:ring-2 transition-all",
+                errors.name ? "ring-red-500/50 border-red-500/20" : "focus:ring-[#7F52FF]/30 active:scale-[0.99]"
+              )}
+            />
+            {errors.name && <MdErrorOutline className="absolute right-4 top-1/2 -translate-y-1/2 text-red-400 text-xl" />}
+          </div>
+        </div>
+
+        {/* Email Input */}
+        <div className="space-y-2">
+          <label className="text-[10px] font-black uppercase tracking-[0.3em] text-[#9999BB] ml-2">Contact Point / Email</label>
+          <div className="relative">
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="vadityamishra777@gmail.com"
+              className={cn(
+                "w-full px-6 py-4 rounded-2xl glass-2 border-white/5 text-white font-medium placeholder:text-white/10 focus:outline-none focus:ring-2 transition-all",
+                errors.email ? "ring-red-500/50 border-red-500/20" : "focus:ring-[#00DE8A]/30 active:scale-[0.99]"
+              )}
+            />
+            {errors.email && <MdErrorOutline className="absolute right-4 top-1/2 -translate-y-1/2 text-red-500/80 text-xl" />}
+          </div>
+        </div>
       </div>
 
-      <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-          Email
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          className={`w-full px-4 py-3 bg-gray-800 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors ${
-            errors.email ? 'border-red-500' : 'border-gray-600'
-          }`}
-          placeholder="your.email@example.com"
-        />
-        {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
-      </div>
-
-      <div>
-        <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-          Message
-        </label>
+      {/* Message Input */}
+      <div className="space-y-2">
+        <label className="text-[10px] font-black uppercase tracking-[0.3em] text-[#9999BB] ml-2">Message Payload</label>
         <textarea
-          id="message"
           name="message"
           value={formData.message}
           onChange={handleChange}
+          placeholder="Describe your vision for the next Android app..."
           rows={5}
-          className={`w-full px-4 py-3 bg-gray-800 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors resize-none ${
-            errors.message ? 'border-red-500' : 'border-gray-600'
-          }`}
-          placeholder="Your message..."
+          className={cn(
+            "w-full px-6 py-4 rounded-[2rem] glass-2 border-white/5 text-white font-medium placeholder:text-white/10 focus:outline-none focus:ring-2 transition-all resize-none",
+            errors.message ? "ring-red-500/50 border-red-500/20" : "focus:ring-[#7F52FF]/30 active:scale-[0.99]"
+          )}
         />
-        {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
       </div>
 
+      {/* Action Button */}
       <button
         type="submit"
         disabled={isSubmitting}
-        className={`w-full py-3 px-4 bg-purple-600 text-white rounded-lg font-medium transition-colors ${
-          isSubmitting
-            ? 'opacity-50 cursor-not-allowed'
-            : 'hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900'
-        }`}
+        className={cn(
+          "w-full py-5 rounded-[2rem] font-black text-sm uppercase tracking-[0.3em] transition-all duration-500 flex items-center justify-center gap-3 relative overflow-hidden group/submit",
+          isSubmitting 
+            ? "bg-[#1A1A28] border border-white/5 text-white/30" 
+            : "bg-gradient-to-r from-[#7F52FF] to-[#00DE8A] text-white shadow-[0_10px_30px_rgba(127,82,255,0.3)] hover:shadow-[0_15px_40px_rgba(127,82,255,0.5)] hover:-translate-y-1 active:scale-95"
+        )}
       >
-        {isSubmitting ? 'Sending...' : 'Send Message'}
+        <div className="absolute inset-0 bg-white/20 opacity-0 group-hover/submit:opacity-100 transition-opacity" />
+        {isSubmitting ? (
+          <div className="flex gap-1.5 items-center">
+              <span className="w-2 h-2 rounded-full bg-white/40 animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-white/40 animate-pulse [animation-delay:200ms]" />
+              <span className="w-2 h-2 rounded-full bg-white/40 animate-pulse [animation-delay:400ms]" />
+              <span className="ml-2 uppercase tracking-widest text-[10px]">Processing Node...</span>
+          </div>
+        ) : (
+          <>
+            <MdSend className="text-xl group-hover/submit:translate-x-1 group-hover/submit:-translate-y-1 transition-transform" />
+            Establish Connection
+          </>
+        )}
       </button>
     </motion.form>
   );

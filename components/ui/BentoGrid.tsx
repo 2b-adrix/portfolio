@@ -1,18 +1,100 @@
-import { useState } from "react";
-import { IoCopyOutline } from "react-icons/io5";
-import Image from "next/image";
+"use client";
 
-// Also install this npm i --save-dev @types/react-lottie
-import Lottie from "react-lottie";
-
+import { useState, useEffect, useRef } from "react";
+import { IoCopyOutline, IoCheckmarkOutline } from "react-icons/io5";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { cn } from "@/lib/utils";
-
-
 import { BackgroundGradientAnimation } from "./GradientBg";
 import GridGlobe from "./GridGlobe";
+import Lottie from "react-lottie";
 import animationData from "@/data/confetti.json";
-import MagicButton from "../MagicButton";
 
+// ─── Tech Stack Data ──────────────────────────────────────────────────────────
+const leftStack = [
+  { name: "Kotlin", color: "#7F52FF", icon: "🏔" },
+  { name: "Jetpack Compose", color: "#00BCD4", icon: "🎨" },
+  { name: "Room DB", color: "#FF6F00", icon: "🗄" },
+  { name: "Hilt DI", color: "#4285F4", icon: "💉" },
+];
+const rightStack = [
+  { name: "Coroutines", color: "#7F52FF", icon: "⚡" },
+  { name: "Retrofit", color: "#00DE8A", icon: "🌐" },
+  { name: "MVVM", color: "#00DE8A", icon: "🏗" },
+  { name: "Socket.IO", color: "#FF6F00", icon: "📡" },
+];
+
+// ─── Spotlight Component ──────────────────────────────────────────────────────
+const SpotlightOverlay = ({ mouseX, mouseY }: { mouseX: any; mouseY: any }) => (
+  <motion.div
+    className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 group-hover/bento:opacity-100 transition duration-300"
+    style={{
+      background: useTransform(
+        [mouseX, mouseY],
+        ([x, y]) => `radial-gradient(600px circle at ${x}px ${y}px, rgba(127,82,255,0.1), transparent 40%)`
+      ),
+    }}
+  />
+);
+
+// ─── MVVM Architecture Diagram (Card 1) ──────────────────────────────────────
+const MVVMDiagram = () => (
+  <div className="absolute inset-0 flex flex-col items-center justify-center p-6 pointer-events-none overflow-hidden">
+    {/* Background grid lines */}
+    <div className="absolute inset-0 bg-[linear-gradient(rgba(127,82,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(127,82,255,0.04)_1px,transparent_1px)] bg-[size:32px_32px]" />
+
+    <div className="relative flex flex-col items-center gap-3 w-full max-w-xs">
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="w-full rounded-2xl border px-4 py-3 text-center glass-1"
+        style={{ borderColor: "#7F52FF40" }}
+      >
+        <div className="text-[10px] font-bold text-[#a78bfa] mb-1 uppercase tracking-[0.2em]">View Layer</div>
+        <div className="flex justify-center gap-2 flex-wrap">
+          {["🎨 Compose", "📐 XML"].map(t => (
+            <span key={t} className="chip text-[9px] py-0">{t}</span>
+          ))}
+        </div>
+      </motion.div>
+
+      <div className="w-px h-8 bg-gradient-to-b from-[#7F52FF] to-[#00DE8A] shadow-[0_0_10px_rgba(127,82,255,0.5)]" />
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.2 }}
+        className="w-full rounded-2xl border px-4 py-4 text-center glass-2"
+        style={{ borderColor: "#00DE8A60" }}
+      >
+        <div className="text-[10px] font-bold text-[#00DE8A] mb-1 uppercase tracking-[0.2em]">ViewModel</div>
+        <div className="flex justify-center gap-2 flex-wrap">
+          {["⚡ StateFlow", "🔄 LiveData"].map(t => (
+            <span key={t} className="chip chip-green text-[9px] py-0">{t}</span>
+          ))}
+        </div>
+      </motion.div>
+
+      <div className="w-px h-8 bg-gradient-to-b from-[#00DE8A] to-[#FF6F00] shadow-[0_0_10px_rgba(0,222,138,0.5)]" />
+
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4 }}
+        className="w-full rounded-2xl border px-4 py-3 text-center glass-1"
+        style={{ borderColor: "#FF6F0040" }}
+      >
+        <div className="text-[10px] font-bold text-[#FF6F00] mb-1 uppercase tracking-[0.2em]">Repository</div>
+        <div className="flex justify-center gap-2">
+          {["🗄 Room", "🌐 Retrofit"].map(t => (
+            <span key={t} className="chip chip-amber text-[9px] py-0">{t}</span>
+          ))}
+        </div>
+      </motion.div>
+    </div>
+  </div>
+);
+
+// ─── BentoGrid Wrapper ────────────────────────────────────────────────────────
 export const BentoGrid = ({
   className,
   children,
@@ -23,8 +105,7 @@ export const BentoGrid = ({
   return (
     <div
       className={cn(
-        // change gap-4 to gap-8, change grid-cols-3 to grid-cols-5, remove md:auto-rows-[18rem], add responsive code
-        "grid grid-cols-1 md:grid-cols-6 lg:grid-cols-5 md:grid-row-7 gap-4 lg:gap-8 mx-auto",
+        "grid grid-cols-1 md:grid-cols-6 lg:grid-cols-5 md:grid-row-7 gap-4 lg:gap-5 mx-auto py-10",
         className
       )}
     >
@@ -33,16 +114,13 @@ export const BentoGrid = ({
   );
 };
 
+// ─── BentoGridItem ────────────────────────────────────────────────────────────
 export const BentoGridItem = ({
   className,
   id,
   title,
   description,
-  //   remove unecessary things here
-  img,
-  imgClassName,
   titleClassName,
-  spareImg,
 }: {
   className?: string;
   id: number;
@@ -53,149 +131,168 @@ export const BentoGridItem = ({
   titleClassName?: string;
   spareImg?: string;
 }) => {
-  const leftLists = ["ReactJS", "Express", "Typescript"];
-  const rightLists = ["VueJS", "NuxtJS", "GraphQL"];
-
   const [copied, setCopied] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
 
-  const defaultOptions = {
-    loop: copied,
-    autoplay: copied,
-    animationData: animationData,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const handleMouseMove = ({ currentTarget, clientX, clientY }: React.MouseEvent) => {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
   };
 
   const handleCopy = () => {
-    const text = "hsu@jsmastery.pro";
-    navigator.clipboard.writeText(text);
+    navigator.clipboard.writeText("vadityamishra777@gmail.com");
     setCopied(true);
+    setTimeout(() => setCopied(false), 3000);
   };
+
+  const cardStyle = {
+    1: { border: "#7F52FF30", glow: "hover:shadow-[0_0_50px_rgba(127,82,255,0.1)]" },
+    2: { border: "#00BCD430", glow: "hover:shadow-[0_0_50px_rgba(0,188,212,0.1)]" },
+    3: { border: "#00DE8A30", glow: "hover:shadow-[0_0_50px_rgba(0,222,138,0.1)]" },
+    4: { border: "#FF6F0030", glow: "hover:shadow-[0_0_50px_rgba(255,111,0,0.1)]" },
+    5: { border: "#7F52FF30", glow: "hover:shadow-[0_0_50px_rgba(127,82,255,0.1)]" },
+    6: { border: "#00DE8A30", glow: "hover:shadow-[0_0_50px_rgba(0,222,138,0.1)]" },
+  }[id] ?? { border: "#ffffff10", glow: "" };
 
   return (
     <div
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
       className={cn(
-        // remove p-4 rounded-3xl dark:bg-black dark:border-white/[0.2] bg-white  border border-transparent, add border border-white/[0.1] overflow-hidden relative
-        "row-span-1 relative overflow-hidden rounded-3xl border border-white/[0.1] group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none justify-between flex flex-col space-y-4",
+        "row-span-1 relative overflow-hidden rounded-[2rem] border group/bento transition-all duration-500 flex flex-col glass-1",
+        cardStyle.glow,
         className
       )}
       style={{
-        //   add these two
-        //   you can generate the color from here https://cssgradient.io/
-        background: "rgb(4,7,29)",
-        backgroundColor:
-          "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
+        borderColor: cardStyle.border,
+        minHeight: "220px",
       }}
     >
-      {/* add img divs */}
-      <div className={`${id === 6 && "flex justify-center"} h-full`}>
-        <div className="w-full h-full absolute">
-          {img && (
-            <Image
-              src={img}
-              alt={img}
-              fill
-              className={cn(imgClassName, "object-cover object-center")}
-            />
-          )}
-        </div>
-        <div
-          className={`absolute right-0 -bottom-5 ${id === 5 && "w-full opacity-80"
-            } `}
-        >
-          {spareImg && (
-            <Image
-              src={spareImg}
-              alt={spareImg}
-              fill
-              className="object-cover object-center"
-            />
-          )}
-        </div>
-        {id === 6 && (
-          // add background animation , remove the p tag
-          <BackgroundGradientAnimation>
-            <div className="absolute z-50 inset-0 flex items-center justify-center text-white font-bold px-4 pointer-events-none text-3xl text-center md:text-4xl lg:text-7xl"></div>
-          </BackgroundGradientAnimation>
-        )}
+      {/* Dynamic Cursor Spotlight */}
+      <SpotlightOverlay mouseX={mouseX} mouseY={mouseY} />
 
-        <div
-          className={cn(
-            titleClassName,
-            "group-hover/bento:translate-x-2 transition duration-200 relative md:h-full min-h-40 flex flex-col px-5 p-5 lg:p-10"
-          )}
-        >
-          {/* change the order of the title and des, font-extralight, remove text-xs text-neutral-600 dark:text-neutral-300 , change the text-color */}
-          <div className="font-sans font-extralight md:max-w-32 md:text-xs lg:text-base text-sm text-[#C1C2D3] z-10">
-            {description}
-          </div>
-          {/* add text-3xl max-w-96 , remove text-neutral-600 dark:text-neutral-300*/}
-          {/* remove mb-2 mt-2 */}
-          <div
-            className={`font-sans text-lg lg:text-3xl max-w-96 font-bold z-10`}
-          >
-            {title}
-          </div>
-
-          {/* for the github 3d globe */}
-          {id === 2 && <GridGlobe />}
-
-          {/* Tech stack list div */}
-          {id === 3 && (
-            <div className="flex gap-1 lg:gap-5 w-fit absolute -right-3 lg:-right-2">
-              {/* tech stack lists */}
-              <div className="flex flex-col gap-3 md:gap-3 lg:gap-8">
-                {leftLists.map((item, i) => (
-                  <span
-                    key={i}
-                    className="lg:py-4 lg:px-3 py-2 px-3 text-xs lg:text-base opacity-50 
-                    lg:opacity-100 rounded-lg text-center bg-[#10132E]"
-                  >
-                    {item}
-                  </span>
-                ))}
-                <span className="lg:py-4 lg:px-3 py-4 px-3  rounded-lg text-center bg-[#10132E]"></span>
-              </div>
-              <div className="flex flex-col gap-3 md:gap-3 lg:gap-8">
-                <span className="lg:py-4 lg:px-3 py-4 px-3  rounded-lg text-center bg-[#10132E]"></span>
-                {rightLists.map((item, i) => (
-                  <span
-                    key={i}
-                    className="lg:py-4 lg:px-3 py-2 px-3 text-xs lg:text-base opacity-50 
-                    lg:opacity-100 rounded-lg text-center bg-[#10132E]"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
+      {/* ── Card 1: MVVM ── */}
+      {id === 1 && (
+        <>
+          <MVVMDiagram />
+          <div className="relative z-10 mt-auto p-6 lg:p-8 bg-gradient-to-t from-black/60 to-transparent">
+            <div className="text-white font-bold text-lg lg:text-xl leading-snug">{title}</div>
+            <div className="text-[#9999BB] text-xs mt-1.5 flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#7F52FF]" />
+                Architectural Excellence
             </div>
-          )}
-          {id === 6 && (
-            <div className="mt-5 relative">
-              {/* button border magic from tailwind css buttons  */}
-              {/* add rounded-md h-8 md:h-8, remove rounded-full */}
-              {/* remove focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 */}
-              {/* add handleCopy() for the copy the text */}
-              <div
-                className={`absolute -bottom-5 right-0 ${copied ? "block" : "block"
-                  }`}
-              >
-                {/* <img src="/confetti.gif" alt="confetti" /> */}
-                <Lottie options={defaultOptions} height={200} width={400} />
-              </div>
+          </div>
+        </>
+      )}
 
-              <MagicButton
-                title={copied ? "Email is Copied!" : "Copy my email address"}
-                icon={<IoCopyOutline />}
-                position="left"
-                handleClick={handleCopy}
-                otherClasses="!bg-[#161A31]"
-              />
-            </div>
-          )}
+      {/* ── Card 2: Globe ── */}
+      {id === 2 && (
+        <div className="h-full relative overflow-hidden">
+          <GridGlobe />
+          <div className="absolute bottom-0 left-0 right-0 p-6 z-10 bg-gradient-to-t from-[#08080f] to-transparent pt-12">
+            <div className="text-white font-bold text-base lg:text-lg leading-snug">{title}</div>
+          </div>
         </div>
-      </div>
+      )}
+
+      {/* ── Card 3: Tech Stack ── */}
+      {id === 3 && (
+        <div className="p-6 lg:p-8 flex flex-col h-full gap-5">
+          <div className="text-white font-bold text-xl">{title}</div>
+          <div className="flex gap-2 flex-1">
+            <div className="flex flex-col gap-2 flex-1">
+              {leftStack.map((item) => (
+                <div key={item.name} className="flex items-center gap-2.5 px-3 py-2.5 rounded-2xl border bg-white/[0.03] border-white/5 text-[11px] font-bold text-white/80 group-hover/bento:border-[#7F52FF40] transition-colors">
+                  <span className="text-lg">{item.icon}</span>
+                  {item.name}
+                </div>
+              ))}
+            </div>
+            <div className="flex flex-col gap-2 flex-1">
+              {rightStack.map((item) => (
+                <div key={item.name} className="flex items-center gap-2.5 px-3 py-2.5 rounded-2xl border bg-white/[0.03] border-white/5 text-[11px] font-bold text-white/80 group-hover/bento:border-[#00DE8A40] transition-colors">
+                  <span className="text-lg">{item.icon}</span>
+                  {item.name}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Card 4: Education ── */}
+      {id === 4 && (
+        <div className="p-6 lg:p-8 flex flex-col justify-center h-full gap-4">
+            <div className="w-14 h-14 rounded-2xl bg-[#FF6F00]/10 border border-[#FF6F00]/30 flex items-center justify-center text-3xl shadow-lg shadow-[#FF6F00]/10">🎓</div>
+            <div>
+                <div className="text-white font-black text-lg leading-tight">Mewar University</div>
+                <div className="text-[#FF6F00] text-xs font-bold tracking-wider uppercase mt-1">CSE · RAJASTHAN</div>
+            </div>
+            <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden mt-2">
+                <motion.div initial={{ width: 0 }} animate={{ width: "25%" }} transition={{ duration: 1.5, ease: "circOut" }} className="h-full bg-gradient-to-r from-[#FF6F00] to-[#FFCA28] rounded-full" />
+            </div>
+            <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest text-[#9999BB]">
+                <span>2024 – 2028</span>
+                <span className="text-[#FF6F00]">SEM 04 / 08</span>
+            </div>
+        </div>
+      )}
+
+      {/* ── Card 5: SIKSHA ── */}
+      {id === 5 && (
+        <div className="relative h-full flex flex-col p-6 lg:p-8">
+            <div className="flex-1 relative flex items-center justify-center">
+                {/* Floating Mockup Shadow */}
+                <div className="absolute w-32 h-6 bg-black/40 blur-xl rounded-full bottom-0" />
+                <div className="relative w-32 h-56 rounded-[2rem] border-2 border-white/10 overflow-hidden glass-2 shadow-2xl animate-float-phone">
+                    <div className="h-1.5 w-full bg-black/20" />
+                    <div className="p-2 space-y-2">
+                        <div className="h-6 rounded-lg bg-[#7F52FF]/20 border border-[#7F52FF]/30 flex items-center px-1.5 gap-1">
+                            <div className="w-2 h-2 rounded-full bg-white/40" />
+                            <div className="flex-1 h-1 bg-white/20 rounded-full" />
+                        </div>
+                        {[1,2,3].map(i => <div key={i} className="h-10 rounded-xl bg-white/5 border border-white/5" />)}
+                    </div>
+                </div>
+            </div>
+            <div className="mt-4">
+                <div className="status-pill text-[9px] py-1 px-2 border-none bg-[#7F52FF]/10 text-[#7F52FF] mb-2">ACTIVE PROJECT</div>
+                <div className="text-white font-black text-xl leading-tight">SIKSHA</div>
+                <div className="text-[#9999BB] text-[10px] uppercase font-bold tracking-widest mt-1">Elite School Management</div>
+            </div>
+        </div>
+      )}
+
+      {/* ── Card 6: Mail ── */}
+      {id === 6 && (
+        <div className="h-full flex flex-col items-center justify-center p-8 gap-6 text-center">
+            <div className="text-white font-black text-xl lg:text-2xl leading-tight max-w-[280px]">
+                Ready to build the <span className="text-gradient-green">Next Big App?</span>
+            </div>
+            <button 
+                onClick={handleCopy}
+                className="relative group/mail px-8 py-4 rounded-2xl glass-2 border-white/20 hover:border-[#00DE8A]/50 transition-all active:scale-95 flex items-center gap-3 overflow-hidden"
+            >
+                <div className="absolute inset-0 bg-gradient-to-r from-[#00DE8A]/10 to-transparent opacity-0 group-hover/mail:opacity-100 transition-opacity" />
+                {copied ? <IoCheckmarkOutline className="text-[#00DE8A] text-xl" /> : <IoCopyOutline className="text-white text-xl" />}
+                <span className="text-white font-bold text-sm">{copied ? "Copied!" : "vadityamishra777@gmail.com"}</span>
+            </button>
+            <div className="flex gap-2">
+                {["Android", "Freelance", "Remote"].map(t => (
+                    <span key={t} className="text-[9px] font-bold text-[#9999BB] uppercase tracking-[0.2em]">{t}</span>
+                ))}
+            </div>
+        </div>
+      )}
     </div>
   );
 };
