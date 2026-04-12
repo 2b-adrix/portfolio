@@ -103,11 +103,11 @@ export const projects = [
   },
 ];
 
-export const testimonials = [
+export const testimonials: { quote: string; name: string; title: string }[] = [
   // Add real testimonials if available, or leave empty
 ];
 
-export const companies = [
+export const companies: { id: number; name: string; img: string; nameImg: string }[] = [
   // Not applicable for student portfolio
 ];
 
