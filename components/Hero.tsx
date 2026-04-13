@@ -76,16 +76,19 @@ const Hero = () => {
   }, [charIndex, lineIndex]);
 
   return (
-    <div ref={containerRef} className="pb-10 pt-6 sm:pt-10 relative min-h-[calc(100vh-140px)] flex items-center overflow-hidden">
+    <div ref={containerRef} className="pb-16 pt-24 lg:pt-10 relative min-h-screen lg:min-h-[calc(100vh-140px)] flex flex-col justify-center overflow-hidden">
       {/* Immersive Background elements */}
       <motion.div style={{ x: bgX, y: bgY }} className="absolute inset-0 pointer-events-none z-0">
         <div className="absolute top-1/4 -left-20 w-96 h-96 bg-[#7F52FF]/10 blur-[120px] rounded-full" />
         <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-[#00DE8A]/10 blur-[120px] rounded-full" />
       </motion.div>
 
-      <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between w-full gap-8 lg:gap-12">
+      <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between w-full gap-10 lg:gap-12 mt-8 lg:mt-0">
+        {/* Mobile text protection fade */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#08080f] via-[#08080f]/80 to-transparent lg:hidden -z-10 blur-xl scale-110 pointer-events-none" />
+
         {/* LEFT — Text content */}
-        <div className="flex-1 flex flex-col items-center lg:items-start space-y-5 sm:space-y-7 max-w-2xl w-full text-center lg:text-left">
+        <div className="flex-1 flex flex-col items-center lg:items-start space-y-6 sm:space-y-8 max-w-2xl w-full text-center lg:text-left relative z-20">
           <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <div className="status-pill glass-2 border-none text-xs">
               <span className="w-2 h-2 rounded-full bg-[#00DE8A] pulse-ring inline-block" />
@@ -103,13 +106,13 @@ const Hero = () => {
             </h1>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4, duration: 0.6 }} className="flex items-center gap-3 justify-center lg:justify-start">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl glass-2 flex items-center justify-center text-[#00DE8A] text-xl sm:text-2xl shadow-xl shadow-black/40 shrink-0">
+          <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4, duration: 0.6 }} className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 justify-center lg:justify-start">
+            <div className="w-12 h-12 rounded-2xl glass-2 flex items-center justify-center text-[#00DE8A] text-2xl shadow-xl shadow-black/40 shrink-0 mb-1 sm:mb-0">
                 <MdPhoneIphone />
             </div>
-            <p className="text-base sm:text-xl md:text-2xl font-bold text-white/90">
+            <p className="text-xl sm:text-2xl font-bold text-white/90 leading-tight">
                 Native Android Architect 
-                <span className="block text-xs sm:text-sm font-bold text-[#9999BB] uppercase tracking-[0.2em] sm:tracking-[0.3em] mt-1">Kotlin · Compose · MVVM</span>
+                <span className="block text-xs sm:text-sm font-bold text-[#9999BB] uppercase tracking-[0.2em] sm:tracking-[0.3em] mt-1 sm:mt-1.5">Kotlin · Compose · MVVM</span>
             </p>
           </motion.div>
 
