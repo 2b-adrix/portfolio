@@ -105,7 +105,7 @@ const Card = ({
 
       <div className="relative z-20 px-4 text-center">
         {/* Icon bubble */}
-        <div className="flex justify-center mb-4 group-hover/canvas-card:opacity-0 transition-opacity duration-300">
+        <div className="lg:flex justify-center mb-4 lg:opacity-100 lg:group-hover/canvas-card:opacity-0 transition-opacity duration-300 hidden">
           <div
             className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl"
             style={{ background: phase.color + "15", border: `1px solid ${phase.color}30` }}
@@ -119,14 +119,14 @@ const Card = ({
 
         {/* Title */}
         <h2
-          className="text-xl font-bold mt-3 opacity-0 group-hover/canvas-card:opacity-100 transition-opacity duration-300 text-white"
+          className="text-xl font-bold mt-4 opacity-100 lg:opacity-0 lg:group-hover/canvas-card:opacity-100 transition-opacity duration-300 text-white"
         >
           {phase.title}
         </h2>
 
         {/* Description */}
         <p
-          className="text-sm mt-3 opacity-0 group-hover/canvas-card:opacity-100 transition-opacity duration-300 leading-relaxed"
+          className="text-sm mt-3 opacity-100 lg:opacity-0 lg:group-hover/canvas-card:opacity-100 transition-opacity duration-300 leading-relaxed"
           style={{ color: "#9999BB" }}
         >
           {phase.des}
