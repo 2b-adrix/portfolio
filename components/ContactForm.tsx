@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MdSend, MdCheckCircle, MdErrorOutline } from "react-icons/md";
 import { cn } from "@/lib/utils";
+import { sendEmailAction } from "@/app/actions/sendEmail";
 
 interface FormData {
   name: string;
@@ -31,11 +32,27 @@ const ContactForm: React.FC = () => {
     e.preventDefault();
     if (!validate()) return;
     setIsSubmitting(true);
-    // Simulate high-fidelity network request
-    await new Promise((r) => setTimeout(r, 2200));
-    setIsSubmitting(false);
-    setSubmitted(true);
-    setFormData({ name: "", email: "", message: "" });
+    
+    try {
+      const result = await sendEmailAction({
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+      });
+      
+      if (result && result.success) {
+        setSubmitted(true);
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        alert("Failed to send message. Please ensure your Access Key is correct.");
+        console.error(result);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong while sending the message.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
