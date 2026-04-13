@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { MdSignalCellular4Bar, MdWifi, MdBatteryFull } from "react-icons/md";
+import { useTheme } from "next-themes";
 
 import Hero from "@/components/Hero";
 import Grid from "@/components/Grid";
@@ -17,6 +18,31 @@ import ThemeSwitcher from "@/components/ThemeSwitcher";
 import Preloader from "@/components/Preloader";
 import FloatingActionButton from "@/components/FloatingActionButton";
 import { Android3DBackground } from "@/components/Android3DBackground";
+
+// Inline theme button (lives inside the header so it's always above z-[5001])
+const InlineThemeBtn = ({ name, label }: { name: string; label: string }) => {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setMounted(true); }, []);
+
+  // Only apply active state after client mount to avoid SSR/client mismatch
+  const isActive = mounted && theme === name;
+
+  return (
+    <button
+      onClick={() => setTheme(name)}
+      title={`${name} mode`}
+      className={`w-7 h-7 rounded-lg text-sm flex items-center justify-center transition-all duration-200 ${
+        isActive
+          ? "bg-gradient-to-br from-[#7F52FF] to-[#00DE8A] text-white shadow-md"
+          : "text-[#9999BB] hover:text-white hover:bg-white/10"
+      }`}
+    >
+      {label}
+    </button>
+  );
+};
 
 const StatusBar = () => {
   const [time, setTime] = useState("");
@@ -80,7 +106,7 @@ const Home = () => {
 
   return (
     <main 
-      className="relative h-screen w-screen overflow-hidden flex flex-col items-center bg-[#08080f]"
+      className="relative h-screen w-screen overflow-hidden flex flex-col items-center bg-black-100"
     >
       <Preloader />
       <div className="noise-overlay" />
@@ -95,67 +121,58 @@ const Home = () => {
       ═══════════════════════════════════════════ */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         {/* Base dark canvas */}
-        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 50% 0%, #081412 0%, #05080F 50%, #030508 100%)' }} />
+        <div className="absolute inset-0 ambient-base" />
 
-        {/* TOP-LEFT — Deep Teal Emerald orb (from #00DE8A, muted to 8%) */}
-        <div className="absolute" style={{
+        {/* TOP-LEFT — Deep Teal Emerald orb */}
+        <div className="absolute orb-1" style={{
           top: '-10%', left: '-5%',
           width: '70vw', height: '70vw',
-          background: 'radial-gradient(circle, rgba(0,180,110,0.09) 0%, transparent 70%)',
           filter: 'blur(60px)',
           animation: 'drift-1 18s ease-in-out infinite alternate',
         }} />
 
-        {/* TOP-RIGHT — Deep Cyan-Teal orb (from #00BCD4, muted to 7%) */}
-        <div className="absolute" style={{
+        {/* TOP-RIGHT — Deep Cyan-Teal orb */}
+        <div className="absolute orb-2" style={{
           top: '-15%', right: '-10%',
           width: '60vw', height: '60vw',
-          background: 'radial-gradient(circle, rgba(0,160,180,0.08) 0%, transparent 70%)',
           filter: 'blur(80px)',
           animation: 'drift-2 22s ease-in-out infinite alternate',
         }} />
 
-        {/* CENTER — Deep Slate-Blue orb (from #9999BB, muted to 5%) */}
-        <div className="absolute" style={{
+        {/* CENTER — Deep Slate-Blue orb */}
+        <div className="absolute orb-3" style={{
           top: '30%', left: '25%',
           width: '55vw', height: '55vw',
-          background: 'radial-gradient(circle, rgba(100,110,160,0.07) 0%, transparent 70%)',
           filter: 'blur(90px)',
           animation: 'drift-3 26s ease-in-out infinite alternate',
         }} />
 
-        {/* BOTTOM-RIGHT — Deep Violet orb (from #7F52FF, muted to 6%) */}
-        <div className="absolute" style={{
+        {/* BOTTOM-RIGHT — Deep Violet orb */}
+        <div className="absolute orb-4" style={{
           bottom: '-10%', right: '5%',
           width: '50vw', height: '50vw',
-          background: 'radial-gradient(circle, rgba(90,55,200,0.08) 0%, transparent 70%)',
           filter: 'blur(70px)',
           animation: 'drift-4 20s ease-in-out infinite alternate',
         }} />
 
-        {/* BOTTOM-LEFT — Deep Teal accent (small, precise) */}
-        <div className="absolute" style={{
+        {/* BOTTOM-LEFT — Deep Teal accent */}
+        <div className="absolute orb-5" style={{
           bottom: '5%', left: '10%',
           width: '35vw', height: '35vw',
-          background: 'radial-gradient(circle, rgba(0,150,130,0.07) 0%, transparent 70%)',
           filter: 'blur(60px)',
           animation: 'drift-5 30s ease-in-out infinite alternate',
         }} />
 
         {/* Subtle grid overlay for depth */}
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'linear-gradient(rgba(0,180,110,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(0,180,110,0.015) 1px, transparent 1px)',
+        <div className="absolute inset-0 ambient-grid" style={{
           backgroundSize: '60px 60px',
         }} />
 
         {/* Vignette - darkens edges for focus */}
-        <div className="absolute inset-0" style={{
-          background: 'radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(3,5,8,0.7) 100%)',
-        }} />
+        <div className="absolute inset-0 ambient-vignette" />
       </div>
 
       <CustomCursor />
-      <ThemeSwitcher />
       <FloatingActionButton />
 
       {/* Android System UI Simulation */}
@@ -177,7 +194,7 @@ const Home = () => {
             </motion.div>
             
             <div className="flex flex-col justify-center">
-                <span className="text-[#9999BB] text-[9px] uppercase font-black tracking-[0.25em] leading-none mb-1">Android Native</span>
+                <span className="text-white-200 text-[9px] uppercase font-black tracking-[0.25em] leading-none mb-1">Android Native</span>
                 <div className="h-6 flex items-center overflow-hidden">
                    <AnimatePresence mode="wait">
                      <motion.span 
@@ -195,7 +212,18 @@ const Home = () => {
             </div>
         </div>
         
-        <div className="flex items-center">
+        <div className="flex items-center gap-3">
+            {/* Theme Switcher — inline in header */}
+            <div className="flex items-center gap-0.5 p-1 rounded-xl bg-white/5 border border-white/8">
+              {[
+                { name: "light" as const, label: "☀️" },
+                { name: "dark"  as const, label: "🌙" },
+                { name: "system" as const, label: "💻" },
+              ].map((t) => (
+                <InlineThemeBtn key={t.name} name={t.name} label={t.label} />
+              ))}
+            </div>
+
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#00DE8A]/10 border border-[#00DE8A]/20 shadow-[0_0_15px_rgba(0,222,138,0.15)]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#00DE8A] animate-pulse shadow-[0_0_8px_#00DE8A]" />
                 <span className="text-[#00DE8A] text-[9px] font-black uppercase tracking-widest hidden sm:block">System Online</span>

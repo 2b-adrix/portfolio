@@ -54,6 +54,43 @@
     --ring: 240 4.9% 83.9%;
     --radius: 0.75rem;
   }
+
+  .light {
+    /* Light Surface System */
+    --bg-base: #F8FAFC;
+    --bg-surface: #FFFFFF;
+    --bg-card: #F1F5F9;
+    --bg-elevated: #E2E8F0;
+
+    /* Text */
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    --text-muted: #94A3B8;
+
+    /* Borders */
+    --border-subtle: rgba(127, 82, 255, 0.25);
+    --border-accent: rgba(0, 222, 138, 0.4);
+
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+  }
 }
 
 @layer base {
@@ -168,6 +205,10 @@
   .text-white-100 { color: var(--text-secondary); }
   .text-white-200 { color: var(--text-muted); }
 
+  .light .text-white { color: #000; }
+  .light .text-white\/8 { border-color: rgba(0,0,0,0.08); }
+  .light .bg-white\/\[0\.04\] { background-color: rgba(255,255,255,0.7); border-color: rgba(0,0,0,0.05); }
+
   /* Premium Noise Background overlay */
   .noise-overlay {
     position: fixed;
@@ -181,21 +222,33 @@
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   }
 
-  /* ─── Glass Elevation System (truly transparent) ─── */
+  /* ─── Glass Elevation System (solid, professional) ─── */
   .glass-1 {
-    background: rgba(10, 10, 20, 0.25);
-    backdrop-filter: blur(14px) saturate(1.5);
-    -webkit-backdrop-filter: blur(14px) saturate(1.5);
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255,255,255,0.05);
+    background: rgba(15, 15, 25, 0.72);
+    backdrop-filter: blur(14px) saturate(1.4);
+    -webkit-backdrop-filter: blur(14px) saturate(1.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.05);
   }
 
   .glass-2 {
-    background: rgba(12, 12, 24, 0.3);
-    backdrop-filter: blur(20px) saturate(1.8);
-    -webkit-backdrop-filter: blur(20px) saturate(1.8);
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255,255,255,0.06);
+    background: rgba(18, 18, 32, 0.82);
+    backdrop-filter: blur(20px) saturate(1.6);
+    -webkit-backdrop-filter: blur(20px) saturate(1.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+
+  .light .glass-1 {
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  }
+
+  .light .glass-2 {
+    background: rgba(245, 248, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
   }
 
   /* Material Bounce */
@@ -212,6 +265,54 @@
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+
+  /* ── Ambient Background Layer System ── */
+  /* Base Canvas */
+  .ambient-base {
+    background: radial-gradient(ellipse at 50% 0%, #081412 0%, #05080F 50%, #030508 100%);
+    transition: background 0.5s ease;
+  }
+  .light .ambient-base {
+    background: radial-gradient(ellipse at 50% 0%, #E8F7F3 0%, #F4F7FB 50%, #E2E8F0 100%);
+  }
+
+  /* Orb 1: Deep Teal Emerald */
+  .orb-1 { background: radial-gradient(circle, rgba(0,180,110,0.09) 0%, transparent 70%); transition: background 0.5s ease; }
+  .light .orb-1 { background: radial-gradient(circle, rgba(0,222,138,0.15) 0%, transparent 70%); }
+
+  /* Orb 2: Deep Cyan-Teal */
+  .orb-2 { background: radial-gradient(circle, rgba(0,160,180,0.08) 0%, transparent 70%); transition: background 0.5s ease; }
+  .light .orb-2 { background: radial-gradient(circle, rgba(0,188,212,0.12) 0%, transparent 70%); }
+
+  /* Orb 3: Slate-Blue */
+  .orb-3 { background: radial-gradient(circle, rgba(100,110,160,0.07) 0%, transparent 70%); transition: background 0.5s ease; }
+  .light .orb-3 { background: radial-gradient(circle, rgba(66,133,244,0.1) 0%, transparent 70%); }
+
+  /* Orb 4: Violet */
+  .orb-4 { background: radial-gradient(circle, rgba(90,55,200,0.08) 0%, transparent 70%); transition: background 0.5s ease; }
+  .light .orb-4 { background: radial-gradient(circle, rgba(127,82,255,0.15) 0%, transparent 70%); }
+
+  /* Orb 5: Teal accent */
+  .orb-5 { background: radial-gradient(circle, rgba(0,150,130,0.07) 0%, transparent 70%); transition: background 0.5s ease; }
+  .light .orb-5 { background: radial-gradient(circle, rgba(0,222,138,0.18) 0%, transparent 70%); }
+
+  /* Grid */
+  .ambient-grid {
+    background-image: linear-gradient(rgba(0,180,110,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(0,180,110,0.015) 1px, transparent 1px);
+    transition: background-image 0.5s ease;
+  }
+  .light .ambient-grid {
+    background-image: linear-gradient(rgba(0,222,138,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,222,138,0.05) 1px, transparent 1px);
+  }
+
+  /* Vignette */
+  .ambient-vignette {
+    background: radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(3,5,8,0.7) 100%);
+    transition: background 0.5s ease;
+  }
+  .light .ambient-vignette {
+    background: radial-gradient(ellipse at 50% 50%, transparent 60%, rgba(200,210,220,0.5) 100%);
   }
 }
 
@@ -267,4 +368,32 @@
 @keyframes drift-5 {
   0%   { transform: translate(0, 0) scale(1); }
   100% { transform: translate(8%, 4%) scale(1.07); }
+}
+
+/* ─── Elite 20/20 UI Polish ─── */
+::selection {
+  background-color: rgba(0, 222, 138, 0.4);
+  color: #ffffff;
+}
+.light ::selection {
+  background-color: rgba(127, 82, 255, 0.3);
+  color: #000000;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.1);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(127, 82, 255, 0.4);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 222, 138, 0.6);
+}
+.light ::-webkit-scrollbar-thumb {
+  background: rgba(127, 82, 255, 0.2);
 }

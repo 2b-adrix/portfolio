@@ -3,25 +3,50 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const buildLogs = [
+  "> Configure project :portfolio",
+  "> Task :app:preBuild UP-TO-DATE",
+  "> Task :app:compileKotlinNative",
+  "> Task :app:buildJetpackCompose",
+  "> Task :app:assembleRelease",
+  "BUILD SUCCESSFUL in 2s",
+];
+
 const Preloader: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [logIndex, setLogIndex] = useState(0);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
+    // Reveal logs sequentially
+    const logTimer = setInterval(() => {
+      setLogIndex(prev => {
+        if (prev < buildLogs.length - 1) return prev + 1;
+        return prev;
+      });
+    }, 350);
 
+    // Progress bar math
     const progressTimer = setInterval(() => {
       setProgress(prev => {
-        if (prev >= 100) return 100;
-        return prev + Math.random() * 15;
+        const next = prev + Math.random() * 25;
+        if (next >= 100) {
+          clearInterval(progressTimer);
+          return 100;
+        }
+        return next;
       });
     }, 200);
 
+    // End preloader after 2.5s
+    const endTimer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2500);
+
     return () => {
-      clearTimeout(timer);
+      clearInterval(logTimer);
       clearInterval(progressTimer);
+      clearTimeout(endTimer);
     };
   }, []);
 
@@ -30,75 +55,66 @@ const Preloader: React.FC = () => {
       {isLoading && (
         <motion.div
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
-          className="fixed inset-0 z-[10000] bg-black flex items-center justify-center"
+          exit={{ opacity: 0, y: -20, filter: 'blur(10px)' }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="fixed inset-0 z-[10000] bg-[#050510] flex flex-col items-center justify-center font-mono"
         >
-          <div className="text-center space-y-8">
-            {/* Logo/Brand */}
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-6xl font-bold"
-            >
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
-                AM
-              </span>
-            </motion.div>
+          {/* subtle background glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40vw] h-[40vw] bg-[#00DE8A]/10 blur-[120px] rounded-full mix-blend-screen pointer-events-none" />
 
-            {/* Loading Text */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="space-y-2"
+          <div className="relative z-10 w-full max-w-md px-6 flex flex-col gap-8">
+            
+            {/* Minimal App Icon / Status */}
+            <motion.div 
+               initial={{ opacity: 0, scale: 0.8 }}
+               animate={{ opacity: 1, scale: 1 }}
+               className="flex items-center gap-4"
             >
-              <h2 className="text-2xl font-semibold text-white">Aditya Mishra</h2>
-              <p className="text-gray-400">Android Developer & Cybersecurity Enthusiast</p>
-            </motion.div>
-
-            {/* Progress Bar */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              className="w-64 mx-auto"
-            >
-              <div className="w-full bg-gray-700 rounded-full h-2 overflow-hidden">
-                <motion.div
-                  className="h-full bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"
-                  initial={{ width: 0 }}
-                  animate={{ width: `${progress}%` }}
-                  transition={{ duration: 0.3 }}
-                />
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#7F52FF] to-[#00DE8A] p-[1px] shadow-[0_0_30px_rgba(0,222,138,0.3)]">
+                 <div className="w-full h-full bg-[#050510]/90 rounded-[11px] flex items-center justify-center backdrop-blur-md text-white font-black text-xl">
+                   A
+                 </div>
               </div>
-              <p className="text-sm text-gray-400 mt-2">{Math.round(progress)}%</p>
+              <div className="flex flex-col">
+                <span className="text-[#00DE8A] text-xs font-black tracking-widest uppercase">Gradle Build</span>
+                <span className="text-[#9999BB] text-[10px]">Aditya_Portfolio_v2.apk</span>
+              </div>
             </motion.div>
 
-            {/* Animated Dots */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-              className="flex justify-center space-x-2"
-            >
-              {[0, 1, 2].map((index) => (
+            {/* Terminal Logs */}
+            <div className="space-y-2 h-32 flex flex-col justify-end">
+              {buildLogs.slice(0, logIndex + 1).map((log, index) => (
                 <motion.div
                   key={index}
-                  className="w-2 h-2 bg-purple-500 rounded-full"
-                  animate={{
-                    scale: [1, 1.5, 1],
-                    opacity: [0.5, 1, 0.5],
-                  }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: Infinity,
-                    delay: index * 0.2,
-                  }}
-                />
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  className={`text-xs sm:text-sm ${
+                    log.includes('SUCCESSFUL') 
+                      ? 'text-[#00DE8A] font-bold' 
+                      : 'text-[#9999BB]'
+                  }`}
+                >
+                  {log}
+                </motion.div>
               ))}
-            </motion.div>
+            </div>
+
+            {/* Loading Bar */}
+            <div className="space-y-3">
+              <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                <motion.div
+                  className="h-full bg-gradient-to-r from-[#7F52FF] to-[#00DE8A]"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${progress}%` }}
+                  transition={{ ease: "circOut" }}
+                />
+              </div>
+              <div className="flex justify-between items-center text-[10px] text-white/50 font-bold tracking-widest uppercase">
+                 <span>Executing Tasks</span>
+                 <span>{Math.round(progress)}%</span>
+              </div>
+            </div>
+
           </div>
         </motion.div>
       )}

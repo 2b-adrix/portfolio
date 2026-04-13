@@ -105,7 +105,7 @@ export const BentoGrid = ({
   return (
     <div
       className={cn(
-        "grid grid-cols-1 md:grid-cols-6 lg:grid-cols-5 md:grid-row-7 gap-4 lg:gap-5 mx-auto py-10",
+        "grid grid-cols-1 lg:grid-cols-5 gap-5 sm:gap-6 mx-auto py-10 w-full max-w-7xl",
         className
       )}
     >
@@ -168,13 +168,12 @@ export const BentoGridItem = ({
       ref={containerRef}
       onMouseMove={handleMouseMove}
       className={cn(
-        "row-span-1 relative overflow-hidden rounded-[2rem] border group/bento transition-all duration-500 flex flex-col glass-1",
+        "relative overflow-hidden rounded-[2rem] border group/bento transition-all duration-500 flex flex-col glass-1 w-full",
         cardStyle.glow,
         className
       )}
       style={{
         borderColor: cardStyle.border,
-        minHeight: id === 1 ? "260px" : "220px",
       }}
     >
       {/* Dynamic Cursor Spotlight */}
