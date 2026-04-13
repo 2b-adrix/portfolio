@@ -9,6 +9,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://adrix.vercel.app"),
   title: "Aditya Kumar Mishra — Native Android Developer",
   description: "Native Android Developer specializing in Kotlin, Jetpack Compose, MVVM Architecture, Room, Hilt DI, Coroutines, and Retrofit. Building premium offline-first apps.",
   keywords: ["Android Developer", "Kotlin", "Jetpack Compose", "MVVM", "Portfolio", "Aditya Mishra", "Mobile App Developer", "Room", "Hilt", "Coroutines"],
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Aditya Kumar Mishra — Native Android Developer",
     description: "Native Android Developer building premium Kotlin apps with Jetpack Compose, MVVM & real-time backends.",
-    url: "https://aditya-portfolio.vercel.app",
+    url: "https://adrix.vercel.app",
     siteName: "Aditya Mishra Portfolio",
     images: [{ url: "/vercel.svg", width: 1200, height: 630, alt: "Aditya Mishra" }],
     locale: "en_US",

@@ -46,13 +46,17 @@ const Hero = () => {
   const bgY = useTransform(smoothY, [-500, 500], [20, -20]);
 
   useEffect(() => {
+    // Crucial performance fix: Only attach costly mouse listeners on devices with physical mice.
+    // This stops touch-swipes from triggering 60fps parallax calculations on mobile CPUs.
+    if (!window.matchMedia("(hover: hover)").matches) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e;
       const { innerWidth, innerHeight } = window;
       mouseX.set(clientX - innerWidth / 2);
       mouseY.set(clientY - innerHeight / 2);
     };
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
@@ -77,10 +81,10 @@ const Hero = () => {
 
   return (
     <div ref={containerRef} className="pb-16 pt-24 lg:pt-10 relative min-h-screen lg:min-h-[calc(100vh-140px)] flex flex-col justify-center overflow-hidden">
-      {/* Immersive Background elements */}
-      <motion.div style={{ x: bgX, y: bgY }} className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-[#7F52FF]/10 blur-[120px] rounded-full" />
-        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-[#00DE8A]/10 blur-[120px] rounded-full" />
+      {/* Immersive Background elements — Pushed to GPU, disabled on phone for 60fps scrolling */}
+      <motion.div style={{ x: bgX, y: bgY }} className="absolute inset-0 pointer-events-none z-0 hidden md:block">
+        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-[#7F52FF]/10 blur-[120px] rounded-full transform-gpu" />
+        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-[#00DE8A]/10 blur-[120px] rounded-full transform-gpu" />
       </motion.div>
 
       <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between w-full gap-8 lg:gap-12 mt-4 lg:mt-0 px-4 sm:px-0">
