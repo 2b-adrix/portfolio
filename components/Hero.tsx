@@ -25,7 +25,7 @@ const techStack = [
   { name: "Retrofit", color: "#00DE8A", icon: "🌐" },
 ];
 
-const Hero = () => {
+const Hero = ({ onExplore }: { onExplore?: () => void }) => {
   const [displayedCode, setDisplayedCode] = useState("");
   const [lineIndex, setLineIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
@@ -130,7 +130,7 @@ const Hero = () => {
 
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.6 }} className="flex flex-col sm:flex-row gap-4 sm:gap-5 w-full items-center justify-center lg:justify-start pb-2 sm:pb-4">
             <div className="w-full sm:w-auto">
-              <MagicButton title="Explore Apps" icon={<FaLocationArrow />} position="right" />
+              <MagicButton title="Explore Apps" icon={<FaLocationArrow />} position="right" handleClick={onExplore} />
             </div>
             
             <div className="flex gap-4">

@@ -76,7 +76,7 @@ const Home = () => {
 
   const renderScreen = () => {
     switch (activeTab) {
-      case "home": return <Hero />;
+      case "home": return <Hero onExplore={() => setActiveTab("projects")} />;
       case "about": return <Grid />;
       case "skills": return <CodeSnippet />;
       case "projects": return <RecentProjects />;

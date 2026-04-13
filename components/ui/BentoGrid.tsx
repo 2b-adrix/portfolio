@@ -38,11 +38,11 @@ const SpotlightOverlay = ({ mouseX, mouseY }: { mouseX: MotionValue<number>; mou
 
 // ─── MVVM Architecture Diagram (Card 1) ──────────────────────────────────────
 const MVVMDiagram = () => (
-  <div className="absolute inset-0 flex flex-col items-center justify-center p-6 pointer-events-none overflow-hidden">
+  <div className="absolute inset-0 flex flex-col items-center pt-8 pb-32 sm:pt-6 sm:pb-20 px-6 overflow-y-auto no-scrollbar">
     {/* Background grid lines */}
     <div className="absolute inset-0 bg-[linear-gradient(rgba(127,82,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(127,82,255,0.04)_1px,transparent_1px)] bg-[size:32px_32px]" />
 
-    <div className="relative flex flex-col items-center gap-3 w-full max-w-xs">
+    <div className="relative flex flex-col items-center gap-2 sm:gap-3 w-full max-w-xs">
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -57,7 +57,7 @@ const MVVMDiagram = () => (
         </div>
       </motion.div>
 
-      <div className="w-px h-8 bg-gradient-to-b from-[#7F52FF] to-[#00DE8A] shadow-[0_0_10px_rgba(127,82,255,0.5)]" />
+      <div className="w-px h-6 sm:h-8 bg-gradient-to-b from-[#7F52FF] to-[#00DE8A] shadow-[0_0_10px_rgba(127,82,255,0.5)]" />
 
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
@@ -74,7 +74,7 @@ const MVVMDiagram = () => (
         </div>
       </motion.div>
 
-      <div className="w-px h-8 bg-gradient-to-b from-[#00DE8A] to-[#FF6F00] shadow-[0_0_10px_rgba(0,222,138,0.5)]" />
+      <div className="w-px h-6 sm:h-8 bg-gradient-to-b from-[#00DE8A] to-[#FF6F00] shadow-[0_0_10px_rgba(0,222,138,0.5)]" />
 
       <motion.div
         initial={{ opacity: 0, y: -10 }}
