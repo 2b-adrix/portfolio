@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { IoCopyOutline, IoCheckmarkOutline } from "react-icons/io5";
-import { Android3DBackground } from "./Android3DBackground";
 
 const snippets = [
   {
@@ -107,14 +106,12 @@ const CodeSnippet: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full h-full min-h-[80vh] flex flex-col justify-center">
-      <Android3DBackground />
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="max-w-4xl mx-auto py-10 w-full relative z-10"
-      >
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="max-w-4xl mx-auto py-10 w-full relative z-10"
+    >
       {/* Header */}
       <div className="text-center mb-12">
         <motion.div 
@@ -221,8 +218,7 @@ const CodeSnippet: React.FC = () => {
         </div>
       </div>
 
-      </motion.div>
-    </div>
+    </motion.div>
   );
 };
 

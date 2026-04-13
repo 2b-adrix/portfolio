@@ -16,7 +16,7 @@ import CodeSnippet from "@/components/CodeSnippet";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import Preloader from "@/components/Preloader";
 import FloatingActionButton from "@/components/FloatingActionButton";
-import { BackgroundGradientAnimation } from "@/components/ui/GradientBg";
+import { Android3DBackground } from "@/components/Android3DBackground";
 
 const StatusBar = () => {
   const [time, setTime] = useState("");
@@ -85,17 +85,73 @@ const Home = () => {
       <Preloader />
       <div className="noise-overlay" />
       
-      {/* Global Immersive Background */}
-      <div className="absolute inset-0 z-0 opacity-40">
-        <BackgroundGradientAnimation 
-          gradientBackgroundStart="#08080f"
-          gradientBackgroundEnd="#050510"
-          firstColor="0, 222, 138" // Android Green
-          secondColor="127, 82, 255" // Kotlin Violet
-          thirdColor="0, 188, 212" // Compose Cyan
-          fourthColor="255, 111, 0" // Material Amber
-          fifthColor="66, 133, 244" // Android Blue
-        />
+      {/* ════════ GLOBAL 3D ANDROID SCENE ════════ */}
+      <Android3DBackground />
+
+      {/* ═══════════════════════════════════════════
+           PREMIUM LAYERED AMBIENT BACKGROUND
+           Muted palette matching font colors:
+           #00DE8A → #00BCD4 → #7F52FF → #9999BB
+      ═══════════════════════════════════════════ */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {/* Base dark canvas */}
+        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 50% 0%, #081412 0%, #05080F 50%, #030508 100%)' }} />
+
+        {/* TOP-LEFT — Deep Teal Emerald orb (from #00DE8A, muted to 8%) */}
+        <div className="absolute" style={{
+          top: '-10%', left: '-5%',
+          width: '70vw', height: '70vw',
+          background: 'radial-gradient(circle, rgba(0,180,110,0.09) 0%, transparent 70%)',
+          filter: 'blur(60px)',
+          animation: 'drift-1 18s ease-in-out infinite alternate',
+        }} />
+
+        {/* TOP-RIGHT — Deep Cyan-Teal orb (from #00BCD4, muted to 7%) */}
+        <div className="absolute" style={{
+          top: '-15%', right: '-10%',
+          width: '60vw', height: '60vw',
+          background: 'radial-gradient(circle, rgba(0,160,180,0.08) 0%, transparent 70%)',
+          filter: 'blur(80px)',
+          animation: 'drift-2 22s ease-in-out infinite alternate',
+        }} />
+
+        {/* CENTER — Deep Slate-Blue orb (from #9999BB, muted to 5%) */}
+        <div className="absolute" style={{
+          top: '30%', left: '25%',
+          width: '55vw', height: '55vw',
+          background: 'radial-gradient(circle, rgba(100,110,160,0.07) 0%, transparent 70%)',
+          filter: 'blur(90px)',
+          animation: 'drift-3 26s ease-in-out infinite alternate',
+        }} />
+
+        {/* BOTTOM-RIGHT — Deep Violet orb (from #7F52FF, muted to 6%) */}
+        <div className="absolute" style={{
+          bottom: '-10%', right: '5%',
+          width: '50vw', height: '50vw',
+          background: 'radial-gradient(circle, rgba(90,55,200,0.08) 0%, transparent 70%)',
+          filter: 'blur(70px)',
+          animation: 'drift-4 20s ease-in-out infinite alternate',
+        }} />
+
+        {/* BOTTOM-LEFT — Deep Teal accent (small, precise) */}
+        <div className="absolute" style={{
+          bottom: '5%', left: '10%',
+          width: '35vw', height: '35vw',
+          background: 'radial-gradient(circle, rgba(0,150,130,0.07) 0%, transparent 70%)',
+          filter: 'blur(60px)',
+          animation: 'drift-5 30s ease-in-out infinite alternate',
+        }} />
+
+        {/* Subtle grid overlay for depth */}
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'linear-gradient(rgba(0,180,110,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(0,180,110,0.015) 1px, transparent 1px)',
+          backgroundSize: '60px 60px',
+        }} />
+
+        {/* Vignette - darkens edges for focus */}
+        <div className="absolute inset-0" style={{
+          background: 'radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(3,5,8,0.7) 100%)',
+        }} />
       </div>
 
       <CustomCursor />
@@ -106,9 +162,9 @@ const Home = () => {
       <StatusBar />
 
       {/* App Bar (Top Status Bar Style) */}
-      <header className="w-full relative z-[5001] px-5 py-3.5 flex items-center justify-between border-b border-white/5 bg-[#050510]/70 backdrop-blur-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)]">
-        {/* Subtle gradient strip at the bottom of the header */}
-        <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <header className="w-full relative z-[5001] px-5 py-3.5 flex items-center justify-between border-b border-white/8 bg-white/[0.04] backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.3)]">
+        {/* Gradient border line at bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#00DE8A]/30 to-transparent" />
         
         <div className="flex items-center gap-3.5">
             <motion.div 

@@ -6,7 +6,6 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import MagicButton from "./MagicButton";
 import { Spotlight } from "./ui/Spotlight";
-import { Android3DBackground } from "./Android3DBackground";
 
 const codeLines = [
   "class MainActivity : AppCompatActivity() {",
@@ -78,7 +77,6 @@ const Hero = () => {
 
   return (
     <div ref={containerRef} className="pb-10 pt-6 sm:pt-10 relative min-h-[calc(100vh-140px)] flex items-center overflow-hidden">
-      <Android3DBackground />
       {/* Immersive Background elements */}
       <motion.div style={{ x: bgX, y: bgY }} className="absolute inset-0 pointer-events-none z-0">
         <div className="absolute top-1/4 -left-20 w-96 h-96 bg-[#7F52FF]/10 blur-[120px] rounded-full" />
