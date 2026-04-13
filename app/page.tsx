@@ -58,7 +58,7 @@ const StatusBar = () => {
   }, []);
 
   return (
-    <div className="w-full h-8 px-6 flex items-center justify-between text-[11px] font-bold text-white/50 relative z-[5002] bg-black/10">
+    <div className="w-full h-6 sm:h-8 px-4 sm:px-6 flex items-center justify-between text-[11px] font-bold text-white/50 relative z-[5002] bg-black/10">
       <div className="flex items-center gap-1.5">
         <span>{time}</span>
       </div>
@@ -179,11 +179,11 @@ const Home = () => {
       <StatusBar />
 
       {/* App Bar (Top Status Bar Style) */}
-      <header className="w-full relative z-[5001] px-5 py-3.5 flex items-center justify-between border-b border-white/8 bg-white/[0.04] backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.3)]">
+      <header className="w-full relative z-[5001] px-4 py-2.5 sm:px-5 sm:py-3.5 flex items-center justify-between border-b border-white/8 bg-white/[0.04] backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.3)]">
         {/* Gradient border line at bottom */}
         <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#00DE8A]/30 to-transparent" />
         
-        <div className="flex items-center gap-3.5">
+        <div className="flex items-center gap-2.5 sm:gap-3.5">
             <motion.div 
               layoutId="appIcon"
               className="relative w-10 h-10 rounded-[12px] bg-gradient-to-br from-[#7F52FF] to-[#00DE8A] p-[1px] shadow-lg shadow-[#00DE8A]/10"
@@ -194,7 +194,7 @@ const Home = () => {
             </motion.div>
             
             <div className="flex flex-col justify-center">
-                <span className="text-white-200 text-[9px] uppercase font-black tracking-[0.25em] leading-none mb-1">Android Native</span>
+                <span className="text-white-200 text-[9px] uppercase font-black tracking-[0.25em] leading-none mb-1 hidden sm:block">Android Native</span>
                 <div className="h-6 flex items-center overflow-hidden">
                    <AnimatePresence mode="wait">
                      <motion.span 
@@ -203,7 +203,7 @@ const Home = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -15 }}
                         transition={{ duration: 0.15, ease: "easeOut" }}
-                        className="text-white font-black tracking-tight text-lg leading-tight"
+                        className="text-white font-black tracking-tight text-[15px] sm:text-lg leading-tight whitespace-nowrap"
                      >
                        {getScreenTitle()}
                      </motion.span>
@@ -212,7 +212,7 @@ const Home = () => {
             </div>
         </div>
         
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1.5 sm:gap-3">
             {/* Theme Switcher — inline in header */}
             <div className="flex items-center gap-0.5 p-1 rounded-xl bg-white/5 border border-white/8">
               {[
@@ -224,16 +224,16 @@ const Home = () => {
               ))}
             </div>
 
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#00DE8A]/10 border border-[#00DE8A]/20 shadow-[0_0_15px_rgba(0,222,138,0.15)]">
+            <div className="flex items-center gap-2 px-2.5 sm:px-3 py-1.5 rounded-full bg-[#00DE8A]/10 border border-[#00DE8A]/20 shadow-[0_0_15px_rgba(0,222,138,0.15)]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#00DE8A] animate-pulse shadow-[0_0_8px_#00DE8A]" />
                 <span className="text-[#00DE8A] text-[9px] font-black uppercase tracking-widest hidden sm:block">System Online</span>
-                <span className="text-[#00DE8A] text-[9px] font-black uppercase tracking-widest sm:hidden">Online</span>
+                <span className="text-[#00DE8A] text-[9px] font-black uppercase tracking-widest hidden sm:block">Online</span>
             </div>
         </div>
       </header>
 
       {/* Screen Container */}
-      <div className="flex-1 w-full max-w-7xl mx-auto px-3 sm:px-6 md:px-10 overflow-y-auto no-scrollbar pt-3 sm:pt-4 pb-28 sm:pb-32 relative z-10">
+      <div className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 overflow-y-auto no-scrollbar pt-4 sm:pt-6 pb-28 sm:pb-32 relative z-10">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}

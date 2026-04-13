@@ -102,7 +102,7 @@ const Footer = () => {
 
         {/* The Connection Engine (Form) */}
         <div className="glass-2 p-1 sm:p-2 rounded-[2rem] sm:rounded-[2.5rem] border-white/5 mb-12 sm:mb-20">
-             <div className="bg-[#080810]/50 rounded-[1.8rem] sm:rounded-[2.2rem] p-4 sm:p-8 md:p-12 overflow-hidden relative">
+             <div className="bg-[#080810]/50 rounded-[1.8rem] sm:rounded-[2.2rem] px-5 py-10 sm:p-8 md:p-12 overflow-hidden relative">
                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#7F52FF]/10 blur-[80px] rounded-full" />
                  <ContactForm />
              </div>

@@ -89,7 +89,7 @@ const ContactForm: React.FC = () => {
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       onSubmit={handleSubmit}
-      className="space-y-6"
+      className="space-y-5 sm:space-y-6"
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Name Input */}
@@ -103,7 +103,7 @@ const ContactForm: React.FC = () => {
               onChange={handleChange}
               placeholder="Aditya Kumar"
               className={cn(
-                "w-full px-6 py-4 rounded-2xl glass-2 border-white/5 text-white font-medium placeholder:text-white/10 focus:outline-none focus:ring-2 transition-all",
+                "w-full px-5 py-3.5 sm:px-6 sm:py-4 rounded-2xl glass-2 border-white/5 text-white font-medium placeholder:text-white/10 focus:outline-none focus:ring-2 transition-all",
                 errors.name ? "ring-red-500/50 border-red-500/20" : "focus:ring-[#7F52FF]/30 active:scale-[0.99]"
               )}
             />
@@ -122,7 +122,7 @@ const ContactForm: React.FC = () => {
               onChange={handleChange}
               placeholder="vadityamishra777@gmail.com"
               className={cn(
-                "w-full px-6 py-4 rounded-2xl glass-2 border-white/5 text-white font-medium placeholder:text-white/10 focus:outline-none focus:ring-2 transition-all",
+                "w-full px-5 py-3.5 sm:px-6 sm:py-4 rounded-2xl glass-2 border-white/5 text-white font-medium placeholder:text-white/10 focus:outline-none focus:ring-2 transition-all",
                 errors.email ? "ring-red-500/50 border-red-500/20" : "focus:ring-[#00DE8A]/30 active:scale-[0.99]"
               )}
             />
@@ -141,7 +141,7 @@ const ContactForm: React.FC = () => {
           placeholder="Describe your vision for the next Android app..."
           rows={5}
           className={cn(
-            "w-full px-6 py-4 rounded-[2rem] glass-2 border-white/5 text-white font-medium placeholder:text-white/10 focus:outline-none focus:ring-2 transition-all resize-none",
+            "w-full px-5 py-3.5 sm:px-6 sm:py-4 rounded-2xl sm:rounded-[2rem] glass-2 border-white/5 text-white font-medium placeholder:text-white/10 focus:outline-none focus:ring-2 transition-all resize-none",
             errors.message ? "ring-red-500/50 border-red-500/20" : "focus:ring-[#7F52FF]/30 active:scale-[0.99]"
           )}
         />
@@ -152,7 +152,7 @@ const ContactForm: React.FC = () => {
         type="submit"
         disabled={isSubmitting}
         className={cn(
-          "w-full py-5 rounded-[2rem] font-black text-sm uppercase tracking-[0.3em] transition-all duration-500 flex items-center justify-center gap-3 relative overflow-hidden group/submit",
+          "w-full py-4 sm:py-5 rounded-2xl sm:rounded-[2rem] font-black text-xs sm:text-sm uppercase tracking-[0.15em] sm:tracking-[0.3em] transition-all duration-500 flex items-center justify-center gap-3 relative overflow-hidden group/submit text-center",
           isSubmitting 
             ? "bg-[#1A1A28] border border-white/5 text-white/30" 
             : "bg-gradient-to-r from-[#7F52FF] to-[#00DE8A] text-white shadow-[0_10px_30px_rgba(127,82,255,0.3)] hover:shadow-[0_15px_40px_rgba(127,82,255,0.5)] hover:-translate-y-1 active:scale-95"

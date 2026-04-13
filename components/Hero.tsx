@@ -101,7 +101,7 @@ const Hero = () => {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2, duration: 0.8 }}>
-            <h1 className="text-[3.25rem] leading-[1] sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter">
+            <h1 className="text-[2.6rem] leading-[1.1] sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter">
               <span className="text-white">Aditya</span>
               <br />
               <span className="text-gradient-green">Kumar</span>
@@ -110,7 +110,7 @@ const Hero = () => {
             </h1>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4, duration: 0.6 }} className="flex flex-row items-center gap-3 sm:gap-4 justify-center lg:justify-start bg-[#12121A]/50 lg:bg-transparent backdrop-blur-md lg:backdrop-blur-none px-5 py-3 lg:p-0 rounded-3xl border border-white/5 lg:border-none">
+          <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4, duration: 0.6 }} className="flex flex-row items-center gap-3 sm:gap-4 justify-center lg:justify-start bg-[#12121A]/50 lg:bg-transparent backdrop-blur-md lg:backdrop-blur-none px-4 py-2.5 sm:px-5 sm:py-3 lg:p-0 rounded-3xl border border-white/5 lg:border-none">
             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl glass-2 flex items-center justify-center text-[#00DE8A] text-xl sm:text-2xl shadow-xl shadow-black/40 shrink-0">
                 <MdPhoneIphone />
             </div>
@@ -128,7 +128,7 @@ const Hero = () => {
             Engineering robust mobile experiences with a focus on <span className="text-white font-bold">clean architecture</span> and <span className="text-white font-bold">real-time performance</span>. Turning complex ideas into fluid Android apps.
           </motion.p>
 
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.6 }} className="flex flex-col sm:flex-row gap-4 sm:gap-5 w-full items-center justify-center lg:justify-start pb-4">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.6 }} className="flex flex-col sm:flex-row gap-4 sm:gap-5 w-full items-center justify-center lg:justify-start pb-2 sm:pb-4">
             <div className="w-full sm:w-auto">
               <MagicButton title="Explore Apps" icon={<FaLocationArrow />} position="right" />
             </div>

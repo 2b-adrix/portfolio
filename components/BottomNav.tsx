@@ -37,7 +37,7 @@ const BottomNav: React.FC<BottomNavProps> = ({ activeTab, setActiveTab, classNam
         className
       )}
     >
-      <div className="max-w-lg mx-auto glass-2 border-white/10 rounded-[2rem] sm:rounded-[2.5rem] p-1 sm:p-2 flex items-center justify-between shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative pointer-events-auto">
+      <div className="max-w-[440px] mx-auto glass-2 border-white/10 rounded-[2rem] sm:rounded-[2.5rem] p-1 sm:p-2 flex items-center justify-between shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative pointer-events-auto">
         
         {navItems.map((item) => {
           const isActive = activeTab === item.id;
@@ -46,7 +46,7 @@ const BottomNav: React.FC<BottomNavProps> = ({ activeTab, setActiveTab, classNam
               key={item.id}
               onClick={() => setActiveTab(item.id as ScreenId)}
               className={cn(
-                "relative flex flex-col items-center justify-center flex-1 py-1 sm:py-1.5 px-0.5 sm:px-1 transition-all duration-500 gap-0.5 sm:gap-1 overflow-hidden",
+                "relative flex flex-col items-center justify-center flex-1 py-1 sm:py-1.5 px-0 sm:px-1 transition-all duration-500 gap-0 sm:gap-1 overflow-hidden",
                 isActive ? "text-[#00DE8A]" : "text-[#9999BB] hover:text-white"
               )}
             >
@@ -80,7 +80,7 @@ const BottomNav: React.FC<BottomNavProps> = ({ activeTab, setActiveTab, classNam
                     scale: isActive ? 1 : 0.9,
                     y: isActive ? 0 : 2
                 }}
-                className="text-[8px] sm:text-[9px] font-black uppercase tracking-[0.15em] sm:tracking-[0.2em] relative z-10 leading-none"
+                className="text-[7.5px] sm:text-[9px] font-black uppercase tracking-[0.1em] sm:tracking-[0.2em] relative z-10 leading-none"
               >
                 {item.label}
               </motion.span>
