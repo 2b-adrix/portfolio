@@ -83,9 +83,9 @@ const Hero = () => {
         <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-[#00DE8A]/10 blur-[120px] rounded-full" />
       </motion.div>
 
-      <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between w-full gap-10 lg:gap-12 mt-8 lg:mt-0">
-        {/* Mobile text protection fade */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#08080f] via-[#08080f]/80 to-transparent lg:hidden -z-10 blur-xl scale-110 pointer-events-none" />
+      <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between w-full gap-8 lg:gap-12 mt-4 lg:mt-0 px-4 sm:px-0">
+        {/* Subtle Ambient Glow behind text */}
+        <div className="absolute inset-x-0 top-0 h-full bg-radial-gradient from-[#08080f]/90 to-transparent lg:hidden -z-10 pointer-events-none" />
 
         {/* LEFT — Text content */}
         <div className="flex-1 flex flex-col items-center lg:items-start space-y-6 sm:space-y-8 max-w-2xl w-full text-center lg:text-left relative z-20">
@@ -97,7 +97,7 @@ const Hero = () => {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2, duration: 0.8 }}>
-            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[0.92] tracking-tighter">
+            <h1 className="text-[3.25rem] leading-[1] sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter">
               <span className="text-white">Aditya</span>
               <br />
               <span className="text-gradient-green">Kumar</span>
@@ -106,29 +106,36 @@ const Hero = () => {
             </h1>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4, duration: 0.6 }} className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 justify-center lg:justify-start">
-            <div className="w-12 h-12 rounded-2xl glass-2 flex items-center justify-center text-[#00DE8A] text-2xl shadow-xl shadow-black/40 shrink-0 mb-1 sm:mb-0">
+          <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4, duration: 0.6 }} className="flex flex-row items-center gap-3 sm:gap-4 justify-center lg:justify-start bg-[#12121A]/50 lg:bg-transparent backdrop-blur-md lg:backdrop-blur-none px-5 py-3 lg:p-0 rounded-3xl border border-white/5 lg:border-none">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl glass-2 flex items-center justify-center text-[#00DE8A] text-xl sm:text-2xl shadow-xl shadow-black/40 shrink-0">
                 <MdPhoneIphone />
             </div>
-            <p className="text-xl sm:text-2xl font-bold text-white/90 leading-tight">
-                Native Android Architect 
-                <span className="block text-xs sm:text-sm font-bold text-[#9999BB] uppercase tracking-[0.2em] sm:tracking-[0.3em] mt-1 sm:mt-1.5">Kotlin · Compose · MVVM</span>
-            </p>
+            <div className="text-left">
+                <p className="text-lg sm:text-2xl font-bold text-white/90 leading-tight">
+                    Native Android Architect 
+                </p>
+                <p className="text-[10px] sm:text-sm font-bold text-[#9999BB] uppercase tracking-[0.2em] sm:tracking-[0.3em] mt-0.5">
+                    Kotlin · Compose · MVVM
+                </p>
+            </div>
           </motion.div>
 
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6, duration: 0.8 }} className="text-sm sm:text-base lg:text-lg text-[#9999BB] leading-relaxed max-w-lg mx-auto lg:mx-0">
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6, duration: 0.8 }} className="text-sm sm:text-base lg:text-lg text-[#9999BB] leading-relaxed max-w-sm sm:max-w-lg mx-auto lg:mx-0 font-medium">
             Engineering robust mobile experiences with a focus on <span className="text-white font-bold">clean architecture</span> and <span className="text-white font-bold">real-time performance</span>. Turning complex ideas into fluid Android apps.
           </motion.p>
 
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.6 }} className="flex flex-wrap gap-3 sm:gap-4 items-center justify-center lg:justify-start">
-            <MagicButton title="Explore Apps" icon={<FaLocationArrow />} position="right" />
-            <div className="flex gap-3">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.6 }} className="flex flex-col sm:flex-row gap-4 sm:gap-5 w-full items-center justify-center lg:justify-start pb-4">
+            <div className="w-full sm:w-auto">
+              <MagicButton title="Explore Apps" icon={<FaLocationArrow />} position="right" />
+            </div>
+            
+            <div className="flex gap-4">
                 {[
                   { icon: <FaGithub />, link: "https://github.com/2b-adrix" },
                   { icon: <FaLinkedin />, link: "https://www.linkedin.com/in/2b-adrix" },
                   { icon: <MdEmail />, link: "mailto:vadityamishra777@gmail.com" }
                 ].map((s, i) => (
-                  <a key={i} href={s.link} target="_blank" className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl glass-2 flex items-center justify-center text-white/70 hover:text-[#00DE8A] hover:border-[#00DE8A]/30 transition-all material-bounce">
+                  <a key={i} href={s.link} target="_blank" className="w-12 h-12 rounded-xl glass-2 flex items-center justify-center text-white/70 hover:text-[#00DE8A] hover:border-[#00DE8A]/30 transition-all material-bounce bg-[#1a1a24]/50">
                     {s.icon}
                   </a>
                 ))}
