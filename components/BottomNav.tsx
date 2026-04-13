@@ -9,10 +9,11 @@ import {
   MdApps,
   MdWork,
   MdEmail,
+  MdPerson,
 } from "react-icons/md";
 import { cn } from "@/lib/utils";
 
-export type ScreenId = "home" | "about" | "skills" | "projects" | "experience" | "contact";
+export type ScreenId = "home" | "profile" | "about" | "skills" | "projects" | "experience" | "contact";
 
 const navItems = [
   { id: "home", label: "Home", icon: <MdHome /> },
@@ -21,6 +22,7 @@ const navItems = [
   { id: "projects", label: "Projects", icon: <MdApps /> },
   { id: "experience", label: "Exp", icon: <MdWork /> },
   { id: "contact", label: "Mail", icon: <MdEmail /> },
+  { id: "profile", label: "Profile", icon: <MdPerson /> },
 ];
 
 interface BottomNavProps {
@@ -37,7 +39,7 @@ const BottomNav: React.FC<BottomNavProps> = ({ activeTab, setActiveTab, classNam
         className
       )}
     >
-      <div className="max-w-[440px] mx-auto glass-2 border-white/10 rounded-[2rem] sm:rounded-[2.5rem] p-1 sm:p-2 flex items-center justify-between shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative pointer-events-auto">
+      <div className="max-w-[480px] mx-auto glass-2 border-white/10 rounded-[2rem] sm:rounded-[3rem] p-1 flex items-center justify-between shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative pointer-events-auto">
         
         {navItems.map((item) => {
           const isActive = activeTab === item.id;
@@ -46,7 +48,7 @@ const BottomNav: React.FC<BottomNavProps> = ({ activeTab, setActiveTab, classNam
               key={item.id}
               onClick={() => setActiveTab(item.id as ScreenId)}
               className={cn(
-                "relative flex flex-col items-center justify-center flex-1 py-1 sm:py-1.5 px-0 sm:px-1 transition-all duration-500 gap-0 sm:gap-1 overflow-hidden",
+                "relative flex flex-col items-center justify-center flex-1 py-1 sm:py-2 px-0 transition-all duration-500 gap-0 sm:gap-1 overflow-hidden",
                 isActive ? "text-[#00DE8A]" : "text-[#9999BB] hover:text-white"
               )}
             >
@@ -66,10 +68,10 @@ const BottomNav: React.FC<BottomNavProps> = ({ activeTab, setActiveTab, classNam
               
               <motion.span 
                 animate={{ 
-                    scale: isActive ? 1.2 : 1,
-                    y: isActive ? -2 : 0
+                    scale: isActive ? 1.15 : 1,
+                    y: isActive ? -1 : 0
                 }}
-                className="text-xl sm:text-2xl relative z-10"
+                className="text-lg sm:text-2xl relative z-10"
               >
                 {item.icon}
               </motion.span>
@@ -78,9 +80,9 @@ const BottomNav: React.FC<BottomNavProps> = ({ activeTab, setActiveTab, classNam
                 animate={{ 
                     opacity: isActive ? 1 : 0.6,
                     scale: isActive ? 1 : 0.9,
-                    y: isActive ? 0 : 2
+                    y: isActive ? 0 : 1
                 }}
-                className="text-[7.5px] sm:text-[9px] font-black uppercase tracking-[0.1em] sm:tracking-[0.2em] relative z-10 leading-none"
+                className="text-[7px] sm:text-[9px] font-black uppercase tracking-[0.1em] sm:tracking-[0.2em] relative z-10 leading-none"
               >
                 {item.label}
               </motion.span>

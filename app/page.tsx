@@ -18,6 +18,7 @@ import ThemeSwitcher from "@/components/ThemeSwitcher";
 import Preloader from "@/components/Preloader";
 import FloatingActionButton from "@/components/FloatingActionButton";
 import { Android3DBackground } from "@/components/Android3DBackground";
+import ProfileSection from "@/components/ProfileSection";
 
 // Inline theme button (lives inside the header so it's always above z-[5001])
 const InlineThemeBtn = ({ name, label }: { name: string; label: string }) => {
@@ -88,7 +89,8 @@ const Home = () => {
           </div>
         );
       case "contact": return <Footer />;
-      default: return <Hero />;
+      case "profile": return <ProfileSection />;
+      default: return <Hero onExplore={() => setActiveTab("projects")} />;
     }
   };
 
@@ -100,6 +102,7 @@ const Home = () => {
       case "projects": return "App Portfolio";
       case "experience": return "Timeline & Flow";
       case "contact": return "Get In Touch";
+      case "profile": return "My Digital DNA";
       default: return "Portfolio";
     }
   };
@@ -186,7 +189,8 @@ const Home = () => {
         <div className="flex items-center gap-2.5 sm:gap-3.5">
             <motion.div 
               layoutId="appIcon"
-              className="relative w-10 h-10 rounded-[12px] bg-gradient-to-br from-[#7F52FF] to-[#00DE8A] p-[1px] shadow-lg shadow-[#00DE8A]/10"
+              onClick={() => setActiveTab("profile")}
+              className="relative w-10 h-10 rounded-[12px] bg-gradient-to-br from-[#7F52FF] to-[#00DE8A] p-[1px] shadow-lg shadow-[#00DE8A]/10 cursor-pointer active:scale-90 transition-transform"
             >
               <div className="w-full h-full bg-[#050510]/90 rounded-[11px] flex items-center justify-center backdrop-blur-md">
                 <span className="text-transparent bg-clip-text bg-gradient-to-br from-[#7F52FF] to-[#00DE8A] font-black text-xl">A</span>

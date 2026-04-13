@@ -170,3 +170,14 @@ export const androidSkills = [
   { name: "MongoDB", level: 68, color: "#4CAF50" },
   { name: "Socket.IO", level: 75, color: "#FF6F00" },
 ];
+
+export const userInfo = {
+  name: "Aditya Kumar Mishra",
+  headline: "Native Android Architect",
+  bio: "Engineering robust mobile experiences with a sharp focus on clean architecture, real-time performance, and elite UI/UX. Currently specializing in Jetpack Compose and modern Android ecosystems to build high-scale, offline-first applications.",
+  avatar: "/profile.jpg", // User can replace this with their actual image
+  university: "Mewar University",
+  location: "Jharsuguda, Odisha 🇮🇳",
+  availability: "Available for Android Projects",
+  role: "Full-stack Android Developer",
+};
