@@ -35,13 +35,13 @@ const Footer = () => {
             <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Contact Node</span>
           </motion.div>
           
-          <h1 className="text-5xl md:text-6xl font-black tracking-tight leading-[0.9]">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[0.92]">
             Let&apos;s Build <span className="text-gradient-green">The Future</span>
             <br />
             <span className="text-gradient-violet">Together.</span>
           </h1>
           
-          <p className="text-[#9999BB] max-w-xl text-lg font-medium leading-relaxed">
+          <p className="text-[#9999BB] max-w-xl text-sm sm:text-base md:text-lg font-medium leading-relaxed px-2 sm:px-0">
             Ready to deploy your next Android project? I&apos;m currently open to full-time roles, high-impact freelance, and creative collaborations.
           </p>
         </div>
@@ -103,15 +103,15 @@ const Footer = () => {
         </div>
 
         {/* The Connection Engine (Form) */}
-        <div className="glass-2 p-2 rounded-[2.5rem] border-white/5 mb-20">
-             <div className="bg-[#080810]/50 rounded-[2.2rem] p-8 md:p-12 overflow-hidden relative">
+        <div className="glass-2 p-1 sm:p-2 rounded-[2rem] sm:rounded-[2.5rem] border-white/5 mb-12 sm:mb-20">
+             <div className="bg-[#080810]/50 rounded-[1.8rem] sm:rounded-[2.2rem] p-4 sm:p-8 md:p-12 overflow-hidden relative">
                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#7F52FF]/10 blur-[80px] rounded-full" />
                  <ContactForm />
              </div>
         </div>
 
         {/* Final Trace */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8 pt-10 border-t border-white/5">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-5 sm:gap-8 pt-8 sm:pt-10 border-t border-white/5">
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
                 <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-[#7F52FF] to-[#00DE8A] flex items-center justify-center text-[10px] font-black">A</div>

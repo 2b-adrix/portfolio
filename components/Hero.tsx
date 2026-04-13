@@ -77,7 +77,7 @@ const Hero = () => {
   }, [charIndex, lineIndex]);
 
   return (
-    <div ref={containerRef} className="pb-10 pt-10 relative min-h-[calc(100vh-140px)] flex items-center overflow-hidden">
+    <div ref={containerRef} className="pb-10 pt-6 sm:pt-10 relative min-h-[calc(100vh-140px)] flex items-center overflow-hidden">
       <Android3DBackground />
       {/* Immersive Background elements */}
       <motion.div style={{ x: bgX, y: bgY }} className="absolute inset-0 pointer-events-none z-0">
@@ -85,18 +85,18 @@ const Hero = () => {
         <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-[#00DE8A]/10 blur-[120px] rounded-full" />
       </motion.div>
 
-      <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between w-full gap-12">
+      <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between w-full gap-8 lg:gap-12">
         {/* LEFT — Text content */}
-        <div className="flex-1 flex flex-col items-start space-y-8 max-w-2xl">
+        <div className="flex-1 flex flex-col items-center lg:items-start space-y-5 sm:space-y-7 max-w-2xl w-full text-center lg:text-left">
           <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <div className="status-pill glass-2 border-none">
+            <div className="status-pill glass-2 border-none text-xs">
               <span className="w-2 h-2 rounded-full bg-[#00DE8A] pulse-ring inline-block" />
               Available for Android Projects
             </div>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2, duration: 0.8 }}>
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-black leading-[0.9] tracking-tighter">
+            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[0.92] tracking-tighter">
               <span className="text-white">Aditya</span>
               <br />
               <span className="text-gradient-green">Kumar</span>
@@ -105,21 +105,21 @@ const Hero = () => {
             </h1>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4, duration: 0.6 }} className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl glass-2 flex items-center justify-center text-[#00DE8A] text-2xl shadow-xl shadow-black/40">
+          <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4, duration: 0.6 }} className="flex items-center gap-3 justify-center lg:justify-start">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl glass-2 flex items-center justify-center text-[#00DE8A] text-xl sm:text-2xl shadow-xl shadow-black/40 shrink-0">
                 <MdPhoneIphone />
             </div>
-            <p className="text-xl md:text-2xl font-bold text-white/90">
+            <p className="text-base sm:text-xl md:text-2xl font-bold text-white/90">
                 Native Android Architect 
-                <span className="block text-sm font-bold text-[#9999BB] uppercase tracking-[0.3em] mt-1">Kotlin · Compose · MVVM</span>
+                <span className="block text-xs sm:text-sm font-bold text-[#9999BB] uppercase tracking-[0.2em] sm:tracking-[0.3em] mt-1">Kotlin · Compose · MVVM</span>
             </p>
           </motion.div>
 
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6, duration: 0.8 }} className="text-lg text-[#9999BB] leading-relaxed max-w-lg">
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6, duration: 0.8 }} className="text-sm sm:text-base lg:text-lg text-[#9999BB] leading-relaxed max-w-lg mx-auto lg:mx-0">
             Engineering robust mobile experiences with a focus on <span className="text-white font-bold">clean architecture</span> and <span className="text-white font-bold">real-time performance</span>. Turning complex ideas into fluid Android apps.
           </motion.p>
 
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.6 }} className="flex flex-wrap gap-4 items-center">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.6 }} className="flex flex-wrap gap-3 sm:gap-4 items-center justify-center lg:justify-start">
             <MagicButton title="Explore Apps" icon={<FaLocationArrow />} position="right" />
             <div className="flex gap-3">
                 {[
@@ -127,7 +127,7 @@ const Hero = () => {
                   { icon: <FaLinkedin />, link: "https://www.linkedin.com/in/2b-adrix" },
                   { icon: <MdEmail />, link: "mailto:vadityamishra777@gmail.com" }
                 ].map((s, i) => (
-                  <a key={i} href={s.link} target="_blank" className="w-12 h-12 rounded-xl glass-2 flex items-center justify-center text-white/70 hover:text-[#00DE8A] hover:border-[#00DE8A]/30 transition-all material-bounce">
+                  <a key={i} href={s.link} target="_blank" className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl glass-2 flex items-center justify-center text-white/70 hover:text-[#00DE8A] hover:border-[#00DE8A]/30 transition-all material-bounce">
                     {s.icon}
                   </a>
                 ))}
@@ -135,16 +135,16 @@ const Hero = () => {
           </motion.div>
         </div>
 
-        {/* RIGHT — Interactive Phone Parallax */}
+        {/* RIGHT — Interactive Phone Parallax (hidden on mobile/tablet) */}
         <motion.div 
             style={{ x: phoneX, y: phoneY }}
             initial={{ opacity: 0, scale: 0.8, rotate: 10 }} 
             animate={{ opacity: 1, scale: 1, rotate: -5 }} 
             transition={{ delay: 0.3, duration: 1, ease: "circOut" }}
-            className="flex-1 flex flex-col items-center relative"
+            className="hidden lg:flex flex-1 flex-col items-center relative"
         >
           {/* Phone Shell */}
-          <div className="relative z-20 w-72 h-[580px] rounded-[3.5rem] p-4 glass-2 border-white/20 shadow-[0_50px_100px_-20px_rgba(0,0,0,1)] ring-1 ring-white/10 group">
+          <div className="relative z-20 w-64 xl:w-72 h-[520px] xl:h-[580px] rounded-[3.5rem] p-4 glass-2 border-white/20 shadow-[0_50px_100px_-20px_rgba(0,0,0,1)] ring-1 ring-white/10 group">
              {/* Screen Content */}
              <div className="w-full h-full rounded-[2.5rem] bg-[#050510] border border-white/5 overflow-hidden flex flex-col">
                 <div className="h-6 w-full flex justify-between items-center px-6 py-4">
@@ -196,9 +196,9 @@ const Hero = () => {
           <motion.div 
             animate={{ y: [0, -10, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -bottom-6 -left-12 px-6 py-4 glass-2 border-[#00DE8A]/30 rounded-2xl z-30 shadow-2xl"
+            className="absolute -bottom-6 left-2 xl:-left-12 px-4 xl:px-6 py-3 xl:py-4 glass-2 border-[#00DE8A]/30 rounded-2xl z-30 shadow-2xl"
           >
-            <div className="text-3xl font-black text-gradient-green">98%</div>
+            <div className="text-2xl xl:text-3xl font-black text-gradient-green">98%</div>
             <div className="text-[8px] font-bold text-[#9999BB] uppercase tracking-[0.2em] mt-1">Compose Performance</div>
           </motion.div>
         </motion.div>

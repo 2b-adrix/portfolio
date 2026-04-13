@@ -206,22 +206,22 @@ export const BentoGridItem = ({
 
       {/* ── Card 3: Tech Stack ── */}
       {id === 3 && (
-        <div className="p-6 lg:p-8 flex flex-col h-full gap-5">
-          <div className="text-white font-bold text-xl">{title}</div>
+        <div className="p-4 sm:p-6 lg:p-8 flex flex-col h-full gap-4 sm:gap-5">
+          <div className="text-white font-bold text-base sm:text-xl">{title}</div>
           <div className="flex gap-2 flex-1">
-            <div className="flex flex-col gap-2 flex-1">
+            <div className="flex flex-col gap-2 flex-1 min-w-0">
               {leftStack.map((item) => (
-                <div key={item.name} className="flex items-center gap-2.5 px-3 py-2.5 rounded-2xl border bg-white/[0.03] border-white/5 text-[11px] font-bold text-white/80 group-hover/bento:border-[#7F52FF40] transition-colors">
-                  <span className="text-lg">{item.icon}</span>
-                  {item.name}
+                <div key={item.name} className="flex items-center gap-2 px-2 sm:px-3 py-2 sm:py-2.5 rounded-2xl border bg-white/[0.03] border-white/5 text-[10px] sm:text-[11px] font-bold text-white/80 group-hover/bento:border-[#7F52FF40] transition-colors min-w-0">
+                  <span className="text-base sm:text-lg shrink-0">{item.icon}</span>
+                  <span className="truncate">{item.name}</span>
                 </div>
               ))}
             </div>
-            <div className="flex flex-col gap-2 flex-1">
+            <div className="flex flex-col gap-2 flex-1 min-w-0">
               {rightStack.map((item) => (
-                <div key={item.name} className="flex items-center gap-2.5 px-3 py-2.5 rounded-2xl border bg-white/[0.03] border-white/5 text-[11px] font-bold text-white/80 group-hover/bento:border-[#00DE8A40] transition-colors">
-                  <span className="text-lg">{item.icon}</span>
-                  {item.name}
+                <div key={item.name} className="flex items-center gap-2 px-2 sm:px-3 py-2 sm:py-2.5 rounded-2xl border bg-white/[0.03] border-white/5 text-[10px] sm:text-[11px] font-bold text-white/80 group-hover/bento:border-[#00DE8A40] transition-colors min-w-0">
+                  <span className="text-base sm:text-lg shrink-0">{item.icon}</span>
+                  <span className="truncate">{item.name}</span>
                 </div>
               ))}
             </div>
@@ -274,19 +274,19 @@ export const BentoGridItem = ({
 
       {/* ── Card 6: Mail ── */}
       {id === 6 && (
-        <div className="h-full flex flex-col items-center justify-center p-8 gap-6 text-center">
-            <div className="text-white font-black text-lg sm:text-xl lg:text-2xl leading-tight max-w-[280px]">
+        <div className="h-full flex flex-col items-center justify-center p-5 sm:p-8 gap-5 sm:gap-6 text-center">
+            <div className="text-white font-black text-base sm:text-xl lg:text-2xl leading-tight max-w-[280px]">
                 Ready to build the <span className="text-gradient-green">Next Big App?</span>
             </div>
             <button 
                 onClick={handleCopy}
-                className="relative group/mail px-8 py-4 rounded-2xl glass-2 border-white/20 hover:border-[#00DE8A]/50 transition-all active:scale-95 flex items-center gap-3 overflow-hidden"
+                className="relative group/mail w-full max-w-[260px] px-4 sm:px-8 py-3 sm:py-4 rounded-2xl glass-2 border-white/20 hover:border-[#00DE8A]/50 transition-all active:scale-95 flex items-center gap-2 sm:gap-3 overflow-hidden"
             >
                 <div className="absolute inset-0 bg-gradient-to-r from-[#00DE8A]/10 to-transparent opacity-0 group-hover/mail:opacity-100 transition-opacity" />
-                {copied ? <IoCheckmarkOutline className="text-[#00DE8A] text-xl" /> : <IoCopyOutline className="text-white text-xl" />}
-                <span className="text-white font-bold text-sm">{copied ? "Copied!" : "vadityamishra777@gmail.com"}</span>
+                {copied ? <IoCheckmarkOutline className="text-[#00DE8A] text-lg shrink-0" /> : <IoCopyOutline className="text-white text-lg shrink-0" />}
+                <span className="text-white font-bold text-xs sm:text-sm truncate relative z-10">{copied ? "Copied!" : "vadityamishra777@gmail.com"}</span>
             </button>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2 justify-center">
                 {["Android", "Freelance", "Remote"].map(t => (
                     <span key={t} className="text-[9px] font-bold text-[#9999BB] uppercase tracking-[0.2em]">{t}</span>
                 ))}

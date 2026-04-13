@@ -34,22 +34,22 @@ const phases = [
 
 const Approach = () => {
   return (
-    <section className="w-full py-20">
+    <section className="w-full py-10 sm:py-20">
       {/* Header */}
-      <div className="text-center mb-14">
+      <div className="text-center mb-10 sm:mb-14 px-4">
         <div className="inline-flex items-center gap-2 status-pill mb-4">
           🏗 Dev Lifecycle
         </div>
-        <h1 className="text-4xl md:text-5xl font-black text-white mb-3">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-3">
           How I{" "}
           <span className="text-gradient-violet">Build Android Apps</span>
         </h1>
-        <p className="text-[#9999BB] max-w-xl mx-auto">
+        <p className="text-sm sm:text-base text-[#9999BB] max-w-xl mx-auto">
           From first wireframe to Play Store listing — a structured, quality-first process
         </p>
       </div>
 
-      <div className="my-10 flex flex-col lg:flex-row items-stretch justify-center w-full gap-5 max-w-5xl mx-auto px-4">
+      <div className="my-6 sm:my-10 flex flex-col lg:flex-row items-stretch justify-center w-full gap-4 sm:gap-5 max-w-5xl mx-auto px-3 sm:px-4">
         {phases.map((phase) => (
           <Card key={phase.order} phase={phase}>
             <CanvasRevealEffect
@@ -80,7 +80,7 @@ const Card = ({
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="border group/canvas-card flex items-center justify-center max-w-sm w-full mx-auto p-5 relative lg:h-[30rem] rounded-3xl flex-1"
+      className="border group/canvas-card flex items-center justify-center max-w-sm w-full mx-auto p-5 relative min-h-[16rem] lg:h-[30rem] rounded-3xl flex-1"
       style={{
         background: "rgb(18,18,26)",
         backgroundImage: "linear-gradient(135deg, rgba(18,18,26,1) 0%, rgba(26,26,40,1) 100%)",

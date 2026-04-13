@@ -149,7 +149,7 @@ const Home = () => {
       </header>
 
       {/* Screen Container */}
-      <div className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-10 overflow-y-auto no-scrollbar pt-4 pb-32 relative z-10">
+      <div className="flex-1 w-full max-w-7xl mx-auto px-3 sm:px-6 md:px-10 overflow-y-auto no-scrollbar pt-3 sm:pt-4 pb-28 sm:pb-32 relative z-10">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}

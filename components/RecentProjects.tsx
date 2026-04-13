@@ -9,24 +9,24 @@ import { PinContainer } from "./ui/Pin";
 const RecentProjects = () => {
   return (
     <div className="py-10">
-      <div className="flex flex-col items-center mb-10">
-        <h2 className="text-4xl md:text-5xl font-black text-white text-center tracking-tight">
+      <div className="flex flex-col items-center mb-10 px-4 text-center">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight">
           App <span className="text-gradient-green">Showcase</span>
         </h2>
-        <p className="text-[#9999BB] mt-3 uppercase tracking-[0.3em] font-bold text-xs">Production Grade Android Apps</p>
+        <p className="text-[#9999BB] mt-3 uppercase tracking-[0.2em] sm:tracking-[0.3em] font-bold text-[10px] sm:text-xs">Production Grade Android Apps</p>
       </div>
 
-      <div className="flex flex-wrap items-center justify-center p-4 gap-x-12 gap-y-16 mt-10">
+      <div className="flex flex-wrap items-center justify-center p-2 sm:p-4 gap-x-8 sm:gap-x-12 gap-y-14 sm:gap-y-16 mt-6 sm:mt-10">
         {projects.map((item) => (
           <div
-            className="lg:min-h-[32.5rem] h-[25rem] flex items-center justify-center sm:w-[570px] w-[80vw]"
+            className="lg:min-h-[32.5rem] h-[25rem] flex items-center justify-center w-[92vw] sm:w-[570px]"
             key={item.id}
           >
             <PinContainer
               title={item.link.replace("https://", "")}
               href={item.link}
             >
-              <div className="relative flex items-center justify-center sm:w-[570px] w-[80vw] overflow-hidden sm:h-[40vh] h-[30vh] mb-8 rounded-3xl glass-1 border-white/5 group">
+              <div className="relative flex items-center justify-center w-[92vw] sm:w-[570px] overflow-hidden h-[28vh] sm:h-[40vh] mb-8 rounded-3xl glass-1 border-white/5 group">
                 {/* Background Pattern */}
                 <div className="absolute inset-0 bg-[#10132E] opacity-50" />
                 <div className="absolute inset-0 bg-[linear-gradient(rgba(127,82,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(127,82,255,0.05)_1px,transparent_1px)] bg-[size:16px_16px]" />
