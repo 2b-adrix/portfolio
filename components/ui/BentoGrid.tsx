@@ -174,7 +174,7 @@ export const BentoGridItem = ({
       )}
       style={{
         borderColor: cardStyle.border,
-        minHeight: "220px",
+        minHeight: id === 1 ? "260px" : "220px",
       }}
     >
       {/* Dynamic Cursor Spotlight */}
@@ -184,8 +184,8 @@ export const BentoGridItem = ({
       {id === 1 && (
         <>
           <MVVMDiagram />
-          <div className="relative z-10 mt-auto p-6 lg:p-8 bg-gradient-to-t from-black/60 to-transparent">
-            <div className="text-white font-bold text-lg lg:text-xl leading-snug">{title}</div>
+          <div className="relative z-10 mt-auto p-6 lg:p-8 pt-20 bg-gradient-to-t from-[#08080f] via-[#08080f]/80 to-transparent">
+            <div className="text-white font-bold text-sm sm:text-base lg:text-xl leading-snug line-clamp-3 sm:line-clamp-none">{title}</div>
             <div className="text-[#9999BB] text-xs mt-1.5 flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#7F52FF]" />
                 Architectural Excellence
@@ -275,7 +275,7 @@ export const BentoGridItem = ({
       {/* ── Card 6: Mail ── */}
       {id === 6 && (
         <div className="h-full flex flex-col items-center justify-center p-8 gap-6 text-center">
-            <div className="text-white font-black text-xl lg:text-2xl leading-tight max-w-[280px]">
+            <div className="text-white font-black text-lg sm:text-xl lg:text-2xl leading-tight max-w-[280px]">
                 Ready to build the <span className="text-gradient-green">Next Big App?</span>
             </div>
             <button 

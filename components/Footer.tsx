@@ -6,6 +6,7 @@ import { MdEmail, MdLocationOn, MdMessage } from "react-icons/md";
 import { socialMedia } from "@/data";
 import ContactForm from "./ContactForm";
 import { motion } from "framer-motion";
+import { Android3DBackground } from "./Android3DBackground";
 
 const iconMap: Record<string, React.ReactNode> = {
   "/git.svg": <FaGithub className="text-white text-lg" />,
@@ -16,9 +17,10 @@ const iconMap: Record<string, React.ReactNode> = {
 
 const Footer = () => {
   return (
-    <footer className="w-full pt-10 pb-10 relative overflow-hidden" id="contact">
+    <footer className="w-full pt-10 pb-32 md:pb-10 relative overflow-hidden" id="contact">
+      <Android3DBackground />
       {/* Background Ambience */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#00DE8A]/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#00DE8A]/5 blur-[120px] rounded-full pointer-events-none z-0" />
 
       <div className="relative z-10 max-w-5xl mx-auto px-6">
         {/* Header Segment */}
