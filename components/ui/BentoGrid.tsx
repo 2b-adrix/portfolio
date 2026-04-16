@@ -40,7 +40,7 @@ const SpotlightOverlay = ({ mouseX, mouseY }: { mouseX: MotionValue<number>; mou
 const MVVMDiagram = () => (
   <div className="absolute inset-0 flex flex-col items-center pt-8 pb-32 sm:pt-6 sm:pb-20 px-6 overflow-y-auto no-scrollbar">
     {/* Background grid lines */}
-    <div className="absolute inset-0 bg-[linear-gradient(rgba(127,82,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(127,82,255,0.04)_1px,transparent_1px)] bg-[size:32px_32px]" />
+    <div className="absolute inset-0 bg-[linear-gradient(var(--border-subtle)_1px,transparent_1px),linear-gradient(90deg,var(--border-subtle)_1px,transparent_1px)] bg-[size:32px_32px]" />
 
     <div className="relative flex flex-col items-center gap-2 sm:gap-3 w-full max-w-xs">
       <motion.div
@@ -183,9 +183,9 @@ export const BentoGridItem = ({
       {id === 1 && (
         <>
           <MVVMDiagram />
-          <div className="relative z-10 mt-auto p-6 lg:p-8 pt-20 bg-gradient-to-t from-[#08080f] via-[#08080f]/80 to-transparent">
-            <div className="text-white font-bold text-sm sm:text-base lg:text-xl leading-snug line-clamp-3 sm:line-clamp-none">{title}</div>
-            <div className="text-[#9999BB] text-xs mt-1.5 flex items-center gap-2">
+          <div className="relative z-10 mt-auto p-6 lg:p-8 pt-20 bg-gradient-to-t from-[var(--bg-base)] via-[var(--bg-base)]/80 to-transparent">
+            <div className="text-[var(--text-primary)] font-bold text-sm sm:text-base lg:text-xl leading-snug line-clamp-3 sm:line-clamp-none">{title}</div>
+            <div className="text-[var(--text-secondary)] text-xs mt-1.5 flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#7F52FF]" />
                 Architectural Excellence
             </div>
@@ -197,8 +197,8 @@ export const BentoGridItem = ({
       {id === 2 && (
         <div className="h-full relative overflow-hidden">
           <GridGlobe />
-          <div className="absolute bottom-0 left-0 right-0 p-6 z-10 bg-gradient-to-t from-[#08080f] to-transparent pt-12">
-            <div className="text-white font-bold text-base lg:text-lg leading-snug">{title}</div>
+          <div className="absolute bottom-0 left-0 right-0 p-6 z-10 bg-gradient-to-t from-[var(--bg-base)] to-transparent pt-12">
+            <div className="text-[var(--text-primary)] font-bold text-base lg:text-lg leading-snug">{title}</div>
           </div>
         </div>
       )}
@@ -206,11 +206,11 @@ export const BentoGridItem = ({
       {/* ── Card 3: Tech Stack ── */}
       {id === 3 && (
         <div className="p-4 sm:p-6 lg:p-8 flex flex-col h-full gap-4 sm:gap-5">
-          <div className="text-white font-bold text-base sm:text-xl">{title}</div>
+          <div className="text-[var(--text-primary)] font-bold text-base sm:text-xl">{title}</div>
           <div className="flex gap-2 flex-1">
             <div className="flex flex-col gap-2 flex-1 min-w-0">
               {leftStack.map((item) => (
-                <div key={item.name} className="flex items-center gap-2 px-2 sm:px-3 py-2 sm:py-2.5 rounded-2xl border bg-white/[0.03] border-white/5 text-[10px] sm:text-[11px] font-bold text-white/80 group-hover/bento:border-[#7F52FF40] transition-colors min-w-0">
+                <div key={item.name} className="flex items-center gap-2 px-2 sm:px-3 py-2 sm:py-2.5 rounded-2xl border bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[10px] sm:text-[11px] font-bold text-[var(--text-primary)] opacity-80 group-hover/bento:border-[#7F52FF40] transition-colors min-w-0 shadow-sm">
                   <span className="text-base sm:text-lg shrink-0">{item.icon}</span>
                   <span className="truncate">{item.name}</span>
                 </div>
@@ -218,7 +218,7 @@ export const BentoGridItem = ({
             </div>
             <div className="flex flex-col gap-2 flex-1 min-w-0">
               {rightStack.map((item) => (
-                <div key={item.name} className="flex items-center gap-2 px-2 sm:px-3 py-2 sm:py-2.5 rounded-2xl border bg-white/[0.03] border-white/5 text-[10px] sm:text-[11px] font-bold text-white/80 group-hover/bento:border-[#00DE8A40] transition-colors min-w-0">
+                <div key={item.name} className="flex items-center gap-2 px-2 sm:px-3 py-2 sm:py-2.5 rounded-2xl border bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[10px] sm:text-[11px] font-bold text-[var(--text-primary)] opacity-80 group-hover/bento:border-[#00DE8A40] transition-colors min-w-0 shadow-sm">
                   <span className="text-base sm:text-lg shrink-0">{item.icon}</span>
                   <span className="truncate">{item.name}</span>
                 </div>
@@ -233,13 +233,13 @@ export const BentoGridItem = ({
         <div className="p-6 lg:p-8 flex flex-col justify-center h-full gap-4">
             <div className="w-14 h-14 rounded-2xl bg-[#FF6F00]/10 border border-[#FF6F00]/30 flex items-center justify-center text-3xl shadow-lg shadow-[#FF6F00]/10">🎓</div>
             <div>
-                <div className="text-white font-black text-lg leading-tight">Mewar University</div>
+                <div className="text-[var(--text-primary)] font-black text-lg leading-tight">Mewar University</div>
                 <div className="text-[#FF6F00] text-xs font-bold tracking-wider uppercase mt-1">CSE · RAJASTHAN</div>
             </div>
-            <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden mt-2">
+            <div className="w-full h-1.5 bg-[var(--bg-base)] rounded-full overflow-hidden mt-2">
                 <motion.div initial={{ width: 0 }} animate={{ width: "25%" }} transition={{ duration: 1.5, ease: "circOut" }} className="h-full bg-gradient-to-r from-[#FF6F00] to-[#FFCA28] rounded-full" />
             </div>
-            <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest text-[#9999BB]">
+            <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest text-[var(--text-secondary)]">
                 <span>2024 – 2028</span>
                 <span className="text-[#FF6F00]">SEM 04 / 08</span>
             </div>
@@ -252,8 +252,8 @@ export const BentoGridItem = ({
             <div className="flex-1 relative flex items-center justify-center">
                 {/* Floating Mockup Shadow */}
                 <div className="absolute w-32 h-6 bg-black/40 blur-xl rounded-full bottom-0" />
-                <div className="relative w-32 h-56 rounded-[2rem] border-2 border-white/10 overflow-hidden glass-2 shadow-2xl animate-float-phone">
-                    <div className="h-1.5 w-full bg-black/20" />
+                <div className="relative w-32 h-56 rounded-[2rem] border-2 border-[var(--border-subtle)] overflow-hidden glass-2 shadow-2xl animate-float-phone">
+                    <div className="h-1.5 w-full bg-[var(--bg-base)]/50" />
                     <div className="p-2 space-y-2">
                         <div className="h-6 rounded-lg bg-[#7F52FF]/20 border border-[#7F52FF]/30 flex items-center px-1.5 gap-1">
                             <div className="w-2 h-2 rounded-full bg-white/40" />
@@ -265,8 +265,8 @@ export const BentoGridItem = ({
             </div>
             <div className="mt-4">
                 <div className="status-pill text-[9px] py-1 px-2 border-none bg-[#7F52FF]/10 text-[#7F52FF] mb-2">ACTIVE PROJECT</div>
-                <div className="text-white font-black text-xl leading-tight">SIKSHA</div>
-                <div className="text-[#9999BB] text-[10px] uppercase font-bold tracking-widest mt-1">Elite School Management</div>
+                <div className="text-[var(--text-primary)] font-black text-xl leading-tight">SIKSHA</div>
+                <div className="text-[var(--text-secondary)] text-[10px] uppercase font-bold tracking-widest mt-1">Elite School Management</div>
             </div>
         </div>
       )}
@@ -274,7 +274,7 @@ export const BentoGridItem = ({
       {/* ── Card 6: Mail ── */}
       {id === 6 && (
         <div className="h-full flex flex-col items-center justify-center p-5 sm:p-8 gap-5 sm:gap-6 text-center">
-            <div className="text-white font-black text-base sm:text-xl lg:text-2xl leading-tight max-w-[280px]">
+            <div className="text-[var(--text-primary)] font-black text-base sm:text-xl lg:text-2xl leading-tight max-w-[280px]">
                 Ready to build the <span className="text-gradient-green">Next Big App?</span>
             </div>
             <button 
@@ -282,12 +282,12 @@ export const BentoGridItem = ({
                 className="relative group/mail w-full max-w-[260px] px-4 sm:px-8 py-3 sm:py-4 rounded-2xl glass-2 border-white/20 hover:border-[#00DE8A]/50 transition-all active:scale-95 flex items-center gap-2 sm:gap-3 overflow-hidden"
             >
                 <div className="absolute inset-0 bg-gradient-to-r from-[#00DE8A]/10 to-transparent opacity-0 group-hover/mail:opacity-100 transition-opacity" />
-                {copied ? <IoCheckmarkOutline className="text-[#00DE8A] text-lg shrink-0" /> : <IoCopyOutline className="text-white text-lg shrink-0" />}
-                <span className="text-white font-bold text-xs sm:text-sm truncate relative z-10">{copied ? "Copied!" : "vadityamishra777@gmail.com"}</span>
+                {copied ? <IoCheckmarkOutline className="text-[#00DE8A] text-lg shrink-0" /> : <IoCopyOutline className="text-[var(--text-primary)] text-lg shrink-0" />}
+                <span className="text-[var(--text-primary)] font-bold text-xs sm:text-sm truncate relative z-10">{copied ? "Copied!" : "vadityamishra777@gmail.com"}</span>
             </button>
             <div className="flex flex-wrap gap-2 justify-center">
                 {["Android", "Freelance", "Remote"].map(t => (
-                    <span key={t} className="text-[9px] font-bold text-[#9999BB] uppercase tracking-[0.2em]">{t}</span>
+                    <span key={t} className="text-[9px] font-bold text-[var(--text-secondary)] uppercase tracking-[0.2em]">{t}</span>
                 ))}
             </div>
         </div>

@@ -39,9 +39,9 @@ const ProfileSection = () => {
             transition={{ type: "spring", stiffness: 300, damping: 15 }}
             className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-full p-1 bg-gradient-to-br from-[#7F52FF] via-[#00DE8A] to-[#00BCD4] shadow-[0_0_60px_rgba(0,222,138,0.25)]"
           >
-            <div className="w-full h-full rounded-full bg-[#050510] overflow-hidden flex items-center justify-center relative ring-4 ring-black/50 overflow-hidden">
+            <div className="w-full h-full rounded-full bg-[var(--bg-base)] overflow-hidden flex items-center justify-center relative ring-4 ring-black/5 blur-0 overflow-hidden">
                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#00DE8A]/10 z-10" />
-               <span className="absolute inset-0 flex items-center justify-center text-5xl sm:text-6xl font-black text-white/10 uppercase select-none">AM</span>
+               <span className="absolute inset-0 flex items-center justify-center text-5xl sm:text-6xl font-black text-[var(--text-primary)] opacity-10 uppercase select-none">AM</span>
                <Image src={userInfo.avatar} alt={userInfo.name} fill className="object-cover relative z-10 hover:scale-110 transition-transform duration-700" /> 
             </div>
           </motion.div>
@@ -52,7 +52,7 @@ const ProfileSection = () => {
             animate={{ scale: 1 }}
             whileHover={{ scale: 1.2, rotate: 10 }}
             transition={{ type: "spring", delay: 0.5 }}
-            className="absolute bottom-1 right-1 sm:bottom-2 sm:right-2 bg-[#050510] p-1.5 rounded-full border border-white/20 shadow-[0_0_20px_rgba(0,222,138,0.3)] z-20 cursor-help"
+            className="absolute bottom-1 right-1 sm:bottom-2 sm:right-2 bg-[var(--bg-surface)] p-1.5 rounded-full border border-white/20 shadow-[0_0_20px_rgba(0,222,138,0.3)] z-20 cursor-help"
             title="Verified Architect"
           >
             <div className="bg-[#00DE8A] p-1 rounded-full text-white text-lg">
@@ -62,7 +62,7 @@ const ProfileSection = () => {
         </div>
 
         <div className="text-center mt-8 space-y-2">
-            <h1 className="text-4xl sm:text-5xl font-black text-white tracking-tight leading-none">
+            <h1 className="text-4xl sm:text-5xl font-black text-[var(--text-primary)] tracking-tight leading-none">
               {userInfo.name.split(' ')[0]} <span className="text-gradient-green">{userInfo.name.split(' ').slice(1).join(' ')}</span>
             </h1>
             <p className="text-lg sm:text-xl font-bold text-[#7F52FF] tracking-wide uppercase">{userInfo.headline}</p>
@@ -73,12 +73,12 @@ const ProfileSection = () => {
       <div className="w-full max-w-3xl mb-12">
         <div className="glass-2 p-1 rounded-[2rem] border-white/5 shadow-2xl overflow-hidden relative group">
           <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#00DE8A]/40 to-transparent" />
-          <div className="p-6 sm:p-10 bg-[#080810]/40 rounded-[1.8rem] relative">
-            <div className="text-[10px] font-black text-[#9999BB] uppercase tracking-[0.3em] mb-4 flex items-center gap-2">
+          <div className="p-6 sm:p-10 bg-[var(--bg-surface)] rounded-[1.8rem] relative">
+            <div className="text-[10px] font-black text-[var(--text-secondary)] uppercase tracking-[0.3em] mb-4 flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#00DE8A]" />
                 Initialization Protocol / Bio
             </div>
-            <p className="text-white font-medium text-base sm:text-lg leading-relaxed italic opacity-90">
+            <p className="text-[var(--text-primary)] font-medium text-base sm:text-lg leading-relaxed italic opacity-90">
                 &quot;{userInfo.bio}&quot;
             </p>
           </div>
@@ -106,8 +106,8 @@ const ProfileSection = () => {
                 {item.icon}
             </div>
             <div>
-                <p className="text-[10px] sm:text-[11px] font-black uppercase tracking-widest text-[#9999BB] mb-1">{item.label}</p>
-                <p className="text-white font-bold text-sm sm:text-base group-hover:text-white transition-colors">{item.value}</p>
+                <p className="text-[10px] sm:text-[11px] font-black uppercase tracking-widest text-[var(--text-secondary)] mb-1">{item.label}</p>
+                <p className="text-[var(--text-primary)] font-bold text-sm sm:text-base group-hover:text-[#00DE8A] transition-colors">{item.value}</p>
             </div>
           </motion.div>
         ))}
@@ -125,7 +125,7 @@ const ProfileSection = () => {
               href={s.link}
               target="_blank"
               whileHover={{ y: -5, scale: 1.1 }}
-              className={`w-14 h-14 rounded-2xl glass-2 border-white/10 flex items-center justify-center text-2xl text-[#9999BB] ${s.color} transition-all material-bounce`}
+              className={`w-14 h-14 rounded-2xl glass-2 border-white/10 flex items-center justify-center text-2xl text-[var(--text-secondary)] ${s.color} transition-all material-bounce`}
             >
                 {s.icon}
             </motion.a>

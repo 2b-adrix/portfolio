@@ -39,7 +39,7 @@ const BottomNav: React.FC<BottomNavProps> = ({ activeTab, setActiveTab, classNam
         className
       )}
     >
-      <div className="max-w-[480px] mx-auto glass-2 border-white/10 rounded-[2rem] sm:rounded-[3rem] p-1 flex items-center justify-between shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative pointer-events-auto">
+      <div className="max-w-[480px] mx-auto glass-2 border-white/10 rounded-[2rem] sm:rounded-[3rem] p-1 flex items-center justify-between shadow-[0_20px_50px_rgba(0,0,0,0.2)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative pointer-events-auto">
         
         {navItems.map((item) => {
           const isActive = activeTab === item.id;
@@ -49,7 +49,7 @@ const BottomNav: React.FC<BottomNavProps> = ({ activeTab, setActiveTab, classNam
               onClick={() => setActiveTab(item.id as ScreenId)}
               className={cn(
                 "relative flex flex-col items-center justify-center flex-1 py-1 sm:py-2 px-0 transition-all duration-500 gap-0 sm:gap-1 overflow-hidden",
-                isActive ? "text-[#00DE8A]" : "text-[#9999BB] hover:text-white"
+                isActive ? "text-[#00DE8A]" : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
               )}
             >
               {/* Active indicator pill (Android Material 3 style) */}

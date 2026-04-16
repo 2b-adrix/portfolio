@@ -11,11 +11,11 @@ const Experience = () => {
         <div className="inline-flex items-center gap-2 status-pill mb-4">
           🛠 Work History
         </div>
-        <h1 className="text-3xl sm:text-4xl md:text-6xl font-black text-white mb-4 leading-tight">
+        <h1 className="text-3xl sm:text-4xl md:text-6xl font-black text-[var(--text-primary)] mb-4 leading-tight">
           How I{" "}
           <span className="text-gradient-green">Build Android</span>
         </h1>
-        <p className="text-[#9999BB] max-w-xl mx-auto font-medium text-sm sm:text-lg">
+        <p className="text-[var(--text-secondary)] max-w-xl mx-auto font-medium text-sm sm:text-lg">
             Engineering fluidity from first wireframe to finalized Play Store release
         </p>
       </div>
@@ -65,7 +65,7 @@ const Experience = () => {
                 
                 <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 sm:gap-4 mb-3 sm:mb-4">
                   <div className="min-w-0">
-                    <h3 className="text-base sm:text-xl font-black text-white leading-tight capitalize">{card.title}</h3>
+                    <h3 className="text-base sm:text-xl font-black text-[var(--text-primary)] leading-tight capitalize">{card.title}</h3>
                     <p
                       className="text-xs sm:text-sm font-bold mt-1 uppercase tracking-widest"
                       style={{ color: index === 0 ? "#7F52FF" : "#00BCD4" }}
@@ -78,13 +78,13 @@ const Experience = () => {
                   </div>
                 </div>
 
-                <p className="text-xs sm:text-sm md:text-base text-[#9999BB] leading-relaxed mb-4 sm:mb-6 font-medium">
+                <p className="text-xs sm:text-sm md:text-base text-[var(--text-secondary)] leading-relaxed mb-4 sm:mb-6 font-medium">
                   {card.desc}
                 </p>
 
                 <div className="flex flex-wrap gap-1.5 sm:gap-2">
                   {card.tags.map((tag) => (
-                    <span key={tag} className="chip text-[9px] sm:text-[10px] py-0.5 sm:py-1 bg-white/5 border-white/5 text-[#9999BB] group-hover:text-white transition-colors">{tag}</span>
+                    <span key={tag} className="chip text-[9px] sm:text-[10px] py-0.5 sm:py-1 bg-white/5 border-white/5 text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">{tag}</span>
                   ))}
                 </div>
               </div>
@@ -111,7 +111,7 @@ const Experience = () => {
           <div className="flex-1 min-w-0 glass-2 p-4 sm:p-6 md:p-8 rounded-[1.5rem] sm:rounded-[2.5rem] border-[#FF6F0020] hover:border-[#FF6F0040] transition-all">
             <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-4">
               <div>
-                <h3 className="text-base sm:text-xl font-black text-white leading-tight">B.Tech Computer Science</h3>
+                <h3 className="text-base sm:text-xl font-black text-[var(--text-primary)] leading-tight">B.Tech Computer Science</h3>
                 <p className="text-xs sm:text-sm font-bold text-[#FF6F00] mt-1 uppercase tracking-widest py-1">Mewar University · RJ</p>
               </div>
               <div className="status-pill glass-1 border-none bg-[#FF6F00]/10 text-[#FF6F00] py-1 text-[10px] font-black uppercase tracking-widest self-start shrink-0">

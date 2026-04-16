@@ -72,11 +72,11 @@ const ContactForm: React.FC = () => {
         <div className="w-20 h-20 rounded-full bg-[#00DE8A]/10 border border-[#00DE8A]/30 flex items-center justify-center mb-2">
             <MdCheckCircle className="text-[#00DE8A] text-5xl animate-bounce" />
         </div>
-        <h3 className="text-3xl font-black text-white leading-tight">Transmission <br /><span className="text-gradient-green">Successful</span></h3>
-        <p className="text-[#9999BB] text-sm max-w-[280px]">Your message has been received. I normally respond within a single business day.</p>
+        <h3 className="text-3xl font-black text-[var(--text-primary)] leading-tight">Transmission <br /><span className="text-gradient-green">Successful</span></h3>
+        <p className="text-[var(--text-secondary)] text-sm max-w-[280px]">Your message has been received. I normally respond within a single business day.</p>
         <button
           onClick={() => setSubmitted(false)}
-          className="mt-4 px-8 py-3 rounded-2xl glass-2 border-white/10 text-white font-bold text-sm hover:border-[#00DE8A]/50 transition-all material-bounce"
+          className="mt-4 px-8 py-3 rounded-2xl glass-2 border-white/10 text-[var(--text-primary)] font-bold text-sm hover:border-[#00DE8A]/50 transition-all material-bounce"
         >
           Send New Node
         </button>
@@ -94,7 +94,7 @@ const ContactForm: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Name Input */}
         <div className="space-y-2">
-          <label className="text-[10px] font-black uppercase tracking-[0.3em] text-[#9999BB] ml-2">App User / Name</label>
+          <label className="text-[10px] font-black uppercase tracking-[0.3em] text-[var(--text-secondary)] ml-2">App User / Name</label>
           <div className="relative">
             <input
               type="text"
@@ -103,7 +103,7 @@ const ContactForm: React.FC = () => {
               onChange={handleChange}
               placeholder="Aditya Kumar"
               className={cn(
-                "w-full px-5 py-3.5 sm:px-6 sm:py-4 rounded-2xl glass-2 border-white/5 text-white font-medium placeholder:text-white/10 focus:outline-none focus:ring-2 transition-all",
+                "w-full px-5 py-3.5 sm:px-6 sm:py-4 rounded-2xl glass-2 border-white/5 text-[var(--text-primary)] font-medium placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 transition-all",
                 errors.name ? "ring-red-500/50 border-red-500/20" : "focus:ring-[#7F52FF]/30 active:scale-[0.99]"
               )}
             />
@@ -113,7 +113,7 @@ const ContactForm: React.FC = () => {
 
         {/* Email Input */}
         <div className="space-y-2">
-          <label className="text-[10px] font-black uppercase tracking-[0.3em] text-[#9999BB] ml-2">Contact Point / Email</label>
+          <label className="text-[10px] font-black uppercase tracking-[0.3em] text-[var(--text-secondary)] ml-2">Contact Point / Email</label>
           <div className="relative">
             <input
               type="email"
@@ -122,7 +122,7 @@ const ContactForm: React.FC = () => {
               onChange={handleChange}
               placeholder="vadityamishra777@gmail.com"
               className={cn(
-                "w-full px-5 py-3.5 sm:px-6 sm:py-4 rounded-2xl glass-2 border-white/5 text-white font-medium placeholder:text-white/10 focus:outline-none focus:ring-2 transition-all",
+                "w-full px-5 py-3.5 sm:px-6 sm:py-4 rounded-2xl glass-2 border-white/5 text-[var(--text-primary)] font-medium placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 transition-all",
                 errors.email ? "ring-red-500/50 border-red-500/20" : "focus:ring-[#00DE8A]/30 active:scale-[0.99]"
               )}
             />
@@ -133,7 +133,7 @@ const ContactForm: React.FC = () => {
 
       {/* Message Input */}
       <div className="space-y-2">
-        <label className="text-[10px] font-black uppercase tracking-[0.3em] text-[#9999BB] ml-2">Message Payload</label>
+        <label className="text-[10px] font-black uppercase tracking-[0.3em] text-[var(--text-secondary)] ml-2">Message Payload</label>
         <textarea
           name="message"
           value={formData.message}
@@ -141,7 +141,7 @@ const ContactForm: React.FC = () => {
           placeholder="Describe your vision for the next Android app..."
           rows={5}
           className={cn(
-            "w-full px-5 py-3.5 sm:px-6 sm:py-4 rounded-2xl sm:rounded-[2rem] glass-2 border-white/5 text-white font-medium placeholder:text-white/10 focus:outline-none focus:ring-2 transition-all resize-none",
+            "w-full px-5 py-3.5 sm:px-6 sm:py-4 rounded-2xl sm:rounded-[2rem] glass-2 border-white/5 text-[var(--text-primary)] font-medium placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 transition-all resize-none",
             errors.message ? "ring-red-500/50 border-red-500/20" : "focus:ring-[#7F52FF]/30 active:scale-[0.99]"
           )}
         />

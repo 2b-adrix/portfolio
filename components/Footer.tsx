@@ -8,7 +8,7 @@ import ContactForm from "./ContactForm";
 import { motion } from "framer-motion";
 
 const iconMap: Record<string, React.ReactNode> = {
-  "/git.svg": <FaGithub className="text-white text-lg" />,
+  "/git.svg": <FaGithub className="text-[var(--text-primary)] text-lg" />,
   "/twit.svg": <FaTwitter className="text-[#1DA1F2] text-lg" />,
   "/link.svg": <FaLinkedin className="text-[#0A66C2] text-lg" />,
   "/insta.svg": <FaInstagram className="text-[#E1306C] text-lg" />,
@@ -39,7 +39,7 @@ const Footer = () => {
             <span className="text-gradient-violet">Together.</span>
           </h1>
           
-          <p className="text-[#9999BB] max-w-xl text-sm sm:text-base md:text-lg font-medium leading-relaxed px-2 sm:px-0">
+          <p className="text-[var(--text-secondary)] max-w-xl text-sm sm:text-base md:text-lg font-medium leading-relaxed px-2 sm:px-0">
             Ready to deploy your next Android project? I&apos;m currently open to full-time roles, high-impact freelance, and creative collaborations.
           </p>
         </div>
@@ -84,16 +84,16 @@ const Footer = () => {
                 <span className="text-2xl">{c.icon}</span>
               </div>
               <div>
-                <p className="text-[10px] font-black uppercase tracking-widest text-[#9999BB] mb-1">{c.label}</p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-[var(--text-secondary)] mb-1">{c.label}</p>
                 {c.href ? (
                   <a
                     href={c.href}
-                    className="text-sm font-bold text-white hover:text-[#00DE8A] transition-colors line-clamp-1"
+                    className="text-sm font-bold text-[var(--text-primary)] hover:text-[#00DE8A] transition-colors line-clamp-1"
                   >
                     {c.value}
                   </a>
                 ) : (
-                  <p className="text-sm font-bold text-white">{c.value}</p>
+                  <p className="text-sm font-bold text-[var(--text-primary)]">{c.value}</p>
                 )}
               </div>
             </motion.div>
@@ -102,7 +102,7 @@ const Footer = () => {
 
         {/* The Connection Engine (Form) */}
         <div className="glass-2 p-1 sm:p-2 rounded-[2rem] sm:rounded-[2.5rem] border-white/5 mb-12 sm:mb-20">
-             <div className="bg-[#080810]/50 rounded-[1.8rem] sm:rounded-[2.2rem] px-5 py-10 sm:p-8 md:p-12 overflow-hidden relative">
+             <div className="bg-[var(--bg-surface)] rounded-[1.8rem] sm:rounded-[2.2rem] px-5 py-10 sm:p-8 md:p-12 overflow-hidden relative">
                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#7F52FF]/10 blur-[80px] rounded-full" />
                  <ContactForm />
              </div>
@@ -112,8 +112,8 @@ const Footer = () => {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-5 sm:gap-8 pt-8 sm:pt-10 border-t border-white/5">
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
-                <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-[#7F52FF] to-[#00DE8A] flex items-center justify-center text-[10px] font-black">A</div>
-                <span className="text-white font-black tracking-tighter">ADITYA KUMAR MISHRA</span>
+                <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-[#7F52FF] to-[#00DE8A] flex items-center justify-center text-[10px] font-black text-white">A</div>
+                <span className="text-[var(--text-primary)] font-black tracking-tighter">ADITYA KUMAR MISHRA</span>
             </div>
             <p className="text-[10px] font-bold text-[#5A5A7A] uppercase tracking-[0.2em]">
                 &copy; 2026 NATIVE ANDROID DEVELOPER
@@ -128,7 +128,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 title={info.label}
-                className="w-12 h-12 flex justify-center items-center rounded-2xl glass-2 border-white/5 hover:border-[#00DE8A]/30 hover:bg-[#00DE8A]/5 text-[#9999BB] hover:text-[#00DE8A] transition-all material-bounce"
+                className="w-12 h-12 flex justify-center items-center rounded-2xl glass-2 border-white/5 hover:border-[#00DE8A]/30 hover:bg-[#00DE8A]/5 text-[var(--text-secondary)] hover:text-[#00DE8A] transition-all material-bounce"
               >
                 {iconMap[info.img] ?? <Image src={info.img} alt={info.label ?? "social"} width={20} height={20} />}
               </a>

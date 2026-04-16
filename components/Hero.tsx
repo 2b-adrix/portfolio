@@ -102,7 +102,7 @@ const Hero = ({ onExplore }: { onExplore?: () => void }) => {
 
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2, duration: 0.8 }}>
             <h1 className="text-[2.6rem] leading-[1.1] sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter">
-              <span className="text-white">Aditya</span>
+              <span className="text-[var(--text-primary)]">Aditya</span>
               <br />
               <span className="text-gradient-green">Kumar</span>
               <br />
@@ -110,22 +110,22 @@ const Hero = ({ onExplore }: { onExplore?: () => void }) => {
             </h1>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4, duration: 0.6 }} className="flex flex-row items-center gap-3 sm:gap-4 justify-center lg:justify-start bg-[#12121A]/50 lg:bg-transparent backdrop-blur-md lg:backdrop-blur-none px-4 py-2.5 sm:px-5 sm:py-3 lg:p-0 rounded-3xl border border-white/5 lg:border-none">
+          <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4, duration: 0.6 }} className="flex flex-row items-center gap-3 sm:gap-4 justify-center lg:justify-start bg-[var(--bg-surface)] lg:bg-transparent backdrop-blur-md lg:backdrop-blur-none px-4 py-2.5 sm:px-5 sm:py-3 lg:p-0 rounded-3xl border border-white/5 lg:border-none shadow-xl lg:shadow-none">
             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl glass-2 flex items-center justify-center text-[#00DE8A] text-xl sm:text-2xl shadow-xl shadow-black/40 shrink-0">
                 <MdPhoneIphone />
             </div>
             <div className="text-left">
-                <p className="text-lg sm:text-2xl font-bold text-white/90 leading-tight">
+                <p className="text-lg sm:text-2xl font-bold text-[var(--text-primary)] leading-tight">
                     Native Android Architect 
                 </p>
-                <p className="text-[10px] sm:text-sm font-bold text-[#9999BB] uppercase tracking-[0.2em] sm:tracking-[0.3em] mt-0.5">
+                <p className="text-[10px] sm:text-sm font-bold text-[var(--text-secondary)] uppercase tracking-[0.2em] sm:tracking-[0.3em] mt-0.5">
                     Kotlin · Compose · MVVM
                 </p>
             </div>
           </motion.div>
 
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6, duration: 0.8 }} className="text-sm sm:text-base lg:text-lg text-[#9999BB] leading-relaxed max-w-sm sm:max-w-lg mx-auto lg:mx-0 font-medium">
-            Engineering robust mobile experiences with a focus on <span className="text-white font-bold">clean architecture</span> and <span className="text-white font-bold">real-time performance</span>. Turning complex ideas into fluid Android apps.
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6, duration: 0.8 }} className="text-sm sm:text-base lg:text-lg text-[var(--text-secondary)] leading-relaxed max-w-sm sm:max-w-lg mx-auto lg:mx-0 font-medium">
+            Engineering robust mobile experiences with a focus on <span className="text-[var(--text-primary)] font-bold">clean architecture</span> and <span className="text-[var(--text-primary)] font-bold">real-time performance</span>. Turning complex ideas into fluid Android apps.
           </motion.p>
 
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.6 }} className="flex flex-col sm:flex-row gap-4 sm:gap-5 w-full items-center justify-center lg:justify-start pb-2 sm:pb-4">
@@ -139,7 +139,7 @@ const Hero = ({ onExplore }: { onExplore?: () => void }) => {
                   { icon: <FaLinkedin />, link: "https://www.linkedin.com/in/2b-adrix" },
                   { icon: <MdEmail />, link: "mailto:vadityamishra777@gmail.com" }
                 ].map((s, i) => (
-                  <a key={i} href={s.link} target="_blank" className="w-12 h-12 rounded-xl glass-2 flex items-center justify-center text-white/70 hover:text-[#00DE8A] hover:border-[#00DE8A]/30 transition-all material-bounce bg-[#1a1a24]/50">
+                  <a key={i} href={s.link} target="_blank" className="w-12 h-12 rounded-xl glass-2 flex items-center justify-center text-[var(--text-secondary)] hover:text-[#00DE8A] hover:border-[#00DE8A]/30 transition-all material-bounce bg-[var(--bg-surface)]">
                     {s.icon}
                   </a>
                 ))}
@@ -158,29 +158,29 @@ const Hero = ({ onExplore }: { onExplore?: () => void }) => {
           {/* Phone Shell */}
           <div className="relative z-20 w-64 xl:w-72 h-[520px] xl:h-[580px] rounded-[3.5rem] p-4 glass-2 border-white/20 shadow-[0_50px_100px_-20px_rgba(0,0,0,1)] ring-1 ring-white/10 group">
              {/* Screen Content */}
-             <div className="w-full h-full rounded-[2.5rem] bg-[#050510] border border-white/5 overflow-hidden flex flex-col">
+             <div className="w-full h-full rounded-[2.5rem] bg-[var(--bg-card)] border border-[var(--border-subtle)] overflow-hidden flex flex-col">
                 <div className="h-6 w-full flex justify-between items-center px-6 py-4">
-                    <span className="text-[10px] text-white/40 font-bold">9:41</span>
+                    <span className="text-[10px] text-[var(--text-secondary)] opacity-40 font-bold">9:41</span>
                     <div className="flex gap-1">
                         <div className="w-3 h-1.5 rounded-sm bg-[#00DE8A]/40" />
-                        <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
+                        <div className="w-1.5 h-1.5 rounded-full bg-[var(--text-secondary)] opacity-20" />
                     </div>
                 </div>
                 
                 {/* Simulated App Content */}
                 <div className="p-4 flex flex-col gap-4 flex-1">
                     <div className="h-12 rounded-2xl bg-gradient-to-br from-[#7F52FF] to-[#00DE8A] p-0.5 shadow-lg shadow-[#7F52FF]/20">
-                        <div className="w-full h-full rounded-[14px] bg-[#050510] flex items-center px-3 gap-2">
+                        <div className="w-full h-full rounded-[14px] bg-[var(--bg-surface)] flex items-center px-3 gap-2">
                             <div className="w-6 h-6 rounded-lg bg-[#7F52FF] animate-pulse" />
                             <div className="flex-1 h-2 bg-white/10 rounded-full" />
                         </div>
                     </div>
                     {[1, 2, 3, 4].map(i => (
-                        <div key={i} className="h-20 rounded-2xl bg-white/[0.03] border border-white/5 p-3 flex gap-3">
-                            <div className="w-12 h-12 rounded-xl bg-white/5" />
+                        <div key={i} className="h-20 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] p-3 flex gap-3 shadow-sm">
+                            <div className="w-12 h-12 rounded-xl bg-[var(--bg-base)]" />
                             <div className="flex-1 space-y-2 py-1">
-                                <div className="w-2/3 h-2 bg-white/10 rounded-full" />
-                                <div className="w-1/2 h-2 bg-white/5 rounded-full" />
+                                <div className="w-2/3 h-2 bg-[var(--text-secondary)] opacity-10 rounded-full" />
+                                <div className="w-1/2 h-2 bg-[var(--text-secondary)] opacity-5 rounded-full" />
                             </div>
                         </div>
                     ))}
@@ -211,7 +211,7 @@ const Hero = ({ onExplore }: { onExplore?: () => void }) => {
             className="absolute -bottom-6 left-2 xl:-left-12 px-4 xl:px-6 py-3 xl:py-4 glass-2 border-[#00DE8A]/30 rounded-2xl z-30 shadow-2xl"
           >
             <div className="text-2xl xl:text-3xl font-black text-gradient-green">98%</div>
-            <div className="text-[8px] font-bold text-[#9999BB] uppercase tracking-[0.2em] mt-1">Compose Performance</div>
+            <div className="text-[8px] font-bold text-[var(--text-secondary)] uppercase tracking-[0.2em] mt-1">Compose Performance</div>
           </motion.div>
         </motion.div>
       </div>
