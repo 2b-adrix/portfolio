@@ -59,7 +59,7 @@ const StatusBar = () => {
   }, []);
 
   return (
-    <div className="w-full h-6 sm:h-8 px-4 sm:px-6 flex items-center justify-between text-[11px] font-bold text-white/50 relative z-[5002] bg-black/10">
+    <div className="w-full h-6 sm:h-8 px-4 sm:px-6 flex items-center justify-between text-[11px] font-bold text-[var(--text-primary)] opacity-70 relative z-[5002] bg-black/5 dark:bg-white/5">
       <div className="flex items-center gap-1.5">
         <span>{time}</span>
       </div>
@@ -192,7 +192,7 @@ const Home = () => {
               onClick={() => setActiveTab("profile")}
               className="relative w-10 h-10 rounded-[12px] bg-gradient-to-br from-[#7F52FF] to-[#00DE8A] p-[1px] shadow-lg shadow-[#00DE8A]/10 cursor-pointer active:scale-90 transition-transform"
             >
-              <div className="w-full h-full bg-[#050510]/90 rounded-[11px] flex items-center justify-center backdrop-blur-md">
+              <div className="w-full h-full bg-[var(--bg-surface)]/90 rounded-[11px] flex items-center justify-center backdrop-blur-md">
                 <span className="text-transparent bg-clip-text bg-gradient-to-br from-[#7F52FF] to-[#00DE8A] font-black text-xl">A</span>
               </div>
             </motion.div>
@@ -207,7 +207,7 @@ const Home = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -15 }}
                         transition={{ duration: 0.15, ease: "easeOut" }}
-                        className="text-white font-black tracking-tight text-[15px] sm:text-lg leading-tight whitespace-nowrap"
+                        className="text-[var(--text-primary)] font-black tracking-tight text-[15px] sm:text-lg leading-tight whitespace-nowrap"
                      >
                        {getScreenTitle()}
                      </motion.span>
@@ -231,7 +231,6 @@ const Home = () => {
             <div className="flex items-center gap-2 px-2.5 sm:px-3 py-1.5 rounded-full bg-[#00DE8A]/10 border border-[#00DE8A]/20 shadow-[0_0_15px_rgba(0,222,138,0.15)]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#00DE8A] animate-pulse shadow-[0_0_8px_#00DE8A]" />
                 <span className="text-[#00DE8A] text-[9px] font-black uppercase tracking-widest hidden sm:block">System Online</span>
-                <span className="text-[#00DE8A] text-[9px] font-black uppercase tracking-widest hidden sm:block">Online</span>
             </div>
         </div>
       </header>

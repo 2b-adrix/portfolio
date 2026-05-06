@@ -40,11 +40,11 @@ const Approach = () => {
         <div className="inline-flex items-center gap-2 status-pill mb-4">
           🏗 Dev Lifecycle
         </div>
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-3">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-[var(--text-primary)] mb-3">
           How I{" "}
           <span className="text-gradient-violet">Build Android Apps</span>
         </h1>
-        <p className="text-sm sm:text-base text-[#9999BB] max-w-xl mx-auto">
+        <p className="text-sm sm:text-base text-[var(--text-secondary)] max-w-xl mx-auto">
           From first wireframe to Play Store listing — a structured, quality-first process
         </p>
       </div>
@@ -80,17 +80,11 @@ const Card = ({
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="border group/canvas-card flex items-center justify-center max-w-sm w-full mx-auto p-5 relative min-h-[16rem] lg:h-[30rem] rounded-3xl flex-1"
+      className="border group/canvas-card flex items-center justify-center max-w-sm w-full mx-auto p-5 relative min-h-[16rem] lg:h-[30rem] rounded-3xl flex-1 bg-[var(--bg-card)] shadow-lg"
       style={{
-        background: "rgb(18,18,26)",
-        backgroundImage: "linear-gradient(135deg, rgba(18,18,26,1) 0%, rgba(26,26,40,1) 100%)",
-        borderColor: phase.color + "25",
+        borderColor: phase.color + "40",
       }}
     >
-      <Icon className="absolute h-8 w-8 -bottom-2.5 -left-2.5 opacity-20" style={{ color: phase.color }} />
-      <Icon className="absolute h-8 w-8 -top-2.5 -right-2.5 opacity-20" style={{ color: phase.color }} />
-      <Icon className="absolute h-8 w-8 -bottom-2.5 -right-2.5 opacity-20" style={{ color: phase.color }} />
-
       <AnimatePresence>
         {hovered && (
           <motion.div
@@ -119,15 +113,14 @@ const Card = ({
 
         {/* Title */}
         <h2
-          className="text-xl font-bold mt-4 opacity-100 lg:opacity-0 lg:group-hover/canvas-card:opacity-100 transition-opacity duration-300 text-white"
+          className="text-xl font-bold mt-4 opacity-100 lg:opacity-0 lg:group-hover/canvas-card:opacity-100 transition-all duration-300 text-[var(--text-primary)] group-hover/canvas-card:text-white drop-shadow-md"
         >
           {phase.title}
         </h2>
 
         {/* Description */}
         <p
-          className="text-sm mt-3 opacity-100 lg:opacity-0 lg:group-hover/canvas-card:opacity-100 transition-opacity duration-300 leading-relaxed"
-          style={{ color: "#9999BB" }}
+          className="text-sm mt-3 opacity-100 lg:opacity-0 lg:group-hover/canvas-card:opacity-100 transition-all duration-300 leading-relaxed text-[var(--text-secondary)] group-hover/canvas-card:text-white/90 font-medium drop-shadow-md"
         >
           {phase.des}
         </p>
@@ -149,8 +142,7 @@ const AceternityIcon = ({ order, color }: { order: string; color: string }) => {
         }}
       />
       <span
-        className="inline-flex items-center justify-center rounded-full bg-[#12121A] px-5 py-2 font-bold text-sm"
-        style={{ color }}
+        className="inline-flex items-center justify-center rounded-full bg-[var(--bg-surface)] px-5 py-2 font-bold text-sm text-[var(--text-primary)]"
       >
         {order}
       </span>

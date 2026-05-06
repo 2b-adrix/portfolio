@@ -104,7 +104,7 @@ const Preloader: React.FC = () => {
             <div className="glass-2 p-8 rounded-[2rem] border-glow overflow-hidden relative group">
                 
                 {/* Subtle Scanline Effect inside the card */}
-                <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-white/[0.02] to-transparent bg-[length:100%_4px] opacity-20" />
+                <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-[var(--text-primary)]/[0.03] to-transparent bg-[length:100%_4px] opacity-20" />
 
                 <div className="flex flex-col gap-10">
                   
@@ -124,23 +124,23 @@ const Preloader: React.FC = () => {
                         </div>
                       </div>
                       <div className="flex flex-col gap-1">
-                        <span className="text-gradient-green text-sm font-black tracking-[0.2em] uppercase">Gradle Build</span>
+                        <span className="text-gradient-green text-sm font-black tracking-[0.2em] uppercase drop-shadow-sm">Gradle Build</span>
                         <div className="flex items-center gap-2">
-                           <span className="text-[var(--text-secondary)] opacity-40 text-[10px] font-mono tracking-wider">Aditya_Portfolio_v2.apk</span>
-                           <span className="w-1 h-1 rounded-full bg-[var(--text-secondary)] opacity-20" />
+                           <span className="text-[var(--text-secondary)] opacity-70 text-[10px] font-mono tracking-wider">Aditya_Portfolio_v2.apk</span>
+                           <span className="w-1 h-1 rounded-full bg-[var(--text-secondary)] opacity-40" />
                            <span className="text-[#7F52FF] text-[10px] font-mono font-bold tracking-wider">v2.4.0-stable</span>
                         </div>
                       </div>
                     </div>
 
-                    <div className="hidden sm:flex flex-col items-end font-mono text-[9px] text-[var(--text-secondary)] opacity-30 uppercase tracking-widest gap-1">
+                    <div className="hidden sm:flex flex-col items-end font-mono text-[9px] text-[var(--text-secondary)] opacity-60 uppercase tracking-widest gap-1">
                        <div className="flex items-center gap-2">
                           <span>MEM</span>
-                          <span className="text-[var(--text-secondary)] opacity-60">{Math.round(memoryUsage)}MB</span>
+                          <span className="text-[var(--text-secondary)] opacity-90">{Math.round(memoryUsage)}MB</span>
                        </div>
                        <div className="flex items-center gap-2">
                           <span>CPU</span>
-                          <span className="text-[var(--text-secondary)] opacity-60">{(progress * 0.8 + 12).toFixed(1)}%</span>
+                          <span className="text-[var(--text-secondary)] opacity-90">{(progress * 0.8 + 12).toFixed(1)}%</span>
                        </div>
                     </div>
                   </div>
@@ -155,11 +155,11 @@ const Preloader: React.FC = () => {
                           animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
                           className={`flex items-start gap-3 ${
                             log.includes('SUCCESSFUL') 
-                              ? 'text-[#00DE8A] font-bold mt-2' 
-                              : 'text-[var(--text-secondary)] opacity-70'
+                              ? 'text-[#00DE8A] font-bold mt-2 drop-shadow-sm' 
+                              : 'text-[var(--text-secondary)] opacity-90'
                           }`}
                         >
-                          <span className="text-[var(--text-secondary)] opacity-20 select-none w-4">{index + 1}</span>
+                          <span className="text-[var(--text-secondary)] opacity-50 select-none w-4">{index + 1}</span>
                           <span className="flex-1">
                             {log}
                             {index === logIndex && logIndex < buildLogs.length - 1 && (
@@ -179,8 +179,8 @@ const Preloader: React.FC = () => {
                   <div className="space-y-4">
                     <div className="flex justify-between items-end">
                        <div className="flex flex-col gap-1">
-                         <span className="text-[10px] text-[var(--text-secondary)] opacity-40 uppercase font-black tracking-[0.2em]">Executing Tasks</span>
-                         <span className="text-[10px] text-[#00DE8A]/80 font-mono tracking-widest animate-pulse">
+                         <span className="text-[10px] text-[var(--text-secondary)] opacity-70 uppercase font-black tracking-[0.2em]">Executing Tasks</span>
+                         <span className="text-[10px] text-[#00DE8A] font-bold font-mono tracking-widest animate-pulse drop-shadow-sm">
                             {progress < 100 ? `Building artifacts...` : `Build Success`}
                          </span>
                        </div>
@@ -189,10 +189,10 @@ const Preloader: React.FC = () => {
                        </span>
                     </div>
 
-                    <div className="relative h-[6px] w-full bg-white/5 rounded-full overflow-hidden">
+                    <div className="relative h-[6px] w-full bg-[var(--text-secondary)]/15 rounded-full overflow-hidden">
                       {/* Glimmer/Shine track */}
                       <motion.div
-                        className="absolute inset-0 h-full bg-gradient-to-r from-transparent via-white/10 to-transparent w-[30%]"
+                        className="absolute inset-0 h-full bg-gradient-to-r from-transparent via-[var(--text-secondary)]/20 to-transparent w-[30%]"
                         animate={{ x: ['-100%', '400%'] }}
                         transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                       />
@@ -209,7 +209,7 @@ const Preloader: React.FC = () => {
                       </motion.div>
                     </div>
 
-                    <div className="flex justify-between items-center text-[8px] text-[var(--text-secondary)] opacity-20 font-mono uppercase tracking-[0.3em]">
+                    <div className="flex justify-between items-center text-[8px] text-[var(--text-secondary)] opacity-60 font-mono uppercase tracking-[0.3em]">
                        <span>Daemon: 8.4.1</span>
                        <span>Threads: 16 (optimized)</span>
                     </div>
@@ -226,7 +226,7 @@ const Preloader: React.FC = () => {
             transition={{ delay: 1 }}
             className="absolute bottom-10 left-0 w-full text-center"
           >
-             <span className="text-[var(--text-secondary)] opacity-15 text-[10px] uppercase tracking-[0.5em] font-medium">
+             <span className="text-[var(--text-secondary)] opacity-40 text-[10px] uppercase tracking-[0.5em] font-medium drop-shadow-sm">
                 Initializing System Drivers
              </span>
           </motion.div>

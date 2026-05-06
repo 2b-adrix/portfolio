@@ -101,12 +101,17 @@ const Hero = ({ onExplore }: { onExplore?: () => void }) => {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2, duration: 0.8 }}>
-            <h1 className="text-[2.6rem] leading-[1.1] sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter">
-              <span className="text-[var(--text-primary)]">Aditya</span>
-              <br />
-              <span className="text-gradient-green">Kumar</span>
-              <br />
-              <span className="text-gradient-violet">Mishra</span>
+            <h1 className="text-[3.2rem] leading-[0.9] sm:text-7xl md:text-8xl lg:text-[7.5rem] font-black tracking-tighter flex flex-col relative z-20 group">
+              <span className="text-[var(--text-primary)] drop-shadow-md">
+                Aditya
+              </span>
+              <span className="text-transparent [-webkit-text-stroke:1.5px_#00DE8A] md:[-webkit-text-stroke:2.5px_#00DE8A] opacity-90 group-hover:opacity-100 transition-opacity duration-500 -mt-1 sm:-mt-3">
+                Kumar
+              </span>
+              <span className="text-gradient-violet relative -mt-1 sm:-mt-3">
+                Mishra
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-[#7F52FF]/30 blur-[40px] -z-10 rounded-full pointer-events-none" />
+              </span>
             </h1>
           </motion.div>
 

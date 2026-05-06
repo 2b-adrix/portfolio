@@ -46,7 +46,7 @@ const Experience = () => {
                     alt={card.title}
                     width={32}
                     height={32}
-                    className="rounded-xl grayscale group-hover:grayscale-0 transition-all"
+                    className="rounded-xl grayscale group-hover:grayscale-0 transition-all w-auto h-auto"
                   />
                 </div>
                 {/* Connector dot — positioned to sit on the glow line */}

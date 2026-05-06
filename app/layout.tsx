@@ -43,7 +43,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/jsm-logo.png" sizes="any" />
         <link rel="manifest" href="/manifest.json" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-title" content="Aditya Portfolio" />
         <meta name="theme-color" content="#08080f" />
         <link rel="apple-touch-icon" href="/vercel.svg" />

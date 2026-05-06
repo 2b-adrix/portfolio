@@ -144,9 +144,9 @@ const AndroidRobot = () => {
 export const Android3DBackground = () => {
   return (
     <div className="absolute inset-x-0 bottom-0 top-[20%] lg:top-0 lg:inset-0 z-[2] pointer-events-none opacity-25 lg:opacity-65 scale-105 lg:scale-100 transition-all duration-1000 will-change-transform">
-      <Canvas 
-        dpr={[1, 1.5]} 
-        gl={{ antialias: false, powerPreference: "high-performance", alpha: true }} 
+      <Canvas
+        dpr={[1, 1.5]}
+        gl={{ antialias: false, powerPreference: "high-performance", alpha: true }}
         camera={{ position: [3, 1, 8], fov: 40 }}
       >
         {/* Pure neutral/warm white lighting — no violet tinting */}

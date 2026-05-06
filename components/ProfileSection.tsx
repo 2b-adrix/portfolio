@@ -42,7 +42,7 @@ const ProfileSection = () => {
             <div className="w-full h-full rounded-full bg-[var(--bg-base)] overflow-hidden flex items-center justify-center relative ring-4 ring-black/5 blur-0 overflow-hidden">
                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#00DE8A]/10 z-10" />
                <span className="absolute inset-0 flex items-center justify-center text-5xl sm:text-6xl font-black text-[var(--text-primary)] opacity-10 uppercase select-none">AM</span>
-               <Image src={userInfo.avatar} alt={userInfo.name} fill className="object-cover relative z-10 hover:scale-110 transition-transform duration-700" /> 
+               <Image src={userInfo.avatar} alt={userInfo.name} fill sizes="(max-width: 768px) 100vw, 20vw" className="object-cover relative z-10 hover:scale-110 transition-transform duration-700" /> 
             </div>
           </motion.div>
           
